@@ -23,7 +23,7 @@
             app:rightIcon="@mipmap/search"
             app:lineVisible="false"
             app:rightColor="@color/white"
-            app:title="wanAndroid"
+            app:title="首页"
             app:titleColor="@color/white"
             app:titleSize="20dp"
             tools:ignore="MissingConstraints" />

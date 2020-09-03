@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @data on 2020/9/2 9:16 AM
  * @auther
- * @describe  //底部导航栏
+ * @describe  底部导航栏
  */
 public class BottomBarAdapter extends FragmentPagerAdapter {
 

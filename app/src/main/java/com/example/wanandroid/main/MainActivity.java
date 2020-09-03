@@ -71,18 +71,23 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 switch (i) {
                     case 0:
                         binding.rg.check(R.id.radioBtn_home);
+                        binding.titleBar.setTitle("首页");
                         break;
                     case 1:
                         binding.rg.check(R.id.radioBtn_answer);
+                        binding.titleBar.setTitle("问答");
                         break;
                     case 2:
                         binding.rg.check(R.id.radioBtn_public);
+                        binding.titleBar.setTitle("公众号");
                         break;
                     case 3:
                         binding.rg.check(R.id.radioBtn_system);
+                        binding.titleBar.setTitle("体系");
                         break;
                     case 4:
                         binding.rg.check(R.id.radioBtn_project);
+                        binding.titleBar.setTitle("项目");
                         break;
                 }
             }

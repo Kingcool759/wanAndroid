@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.adapter.BannerRecyclerViewAdapter;
@@ -23,10 +22,6 @@ import com.example.wanandroid.bean.ImageUrl;
 import com.example.wanandroid.databean.HomeListRes;
 import com.example.wanandroid.databinding.FragmentHomeBinding;
 import com.example.wanandroid.viewmodel.HomeViewModel;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;

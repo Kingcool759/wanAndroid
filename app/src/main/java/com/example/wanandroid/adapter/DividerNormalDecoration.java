@@ -11,34 +11,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
 
-
 /**
- * @data on 2020/9/1 10:56 AM
- * @auther ArmStrong
- * @describe 装饰类：简单的Recylerview分割线,（高度+颜色）
+ * @data on 2020/9/3 5:09 PM
+ * @auther
+ * @describe  标准版分割线装饰
  */
-public class DividerItemDecoration extends RecyclerView.ItemDecoration {
+public class DividerNormalDecoration extends RecyclerView.ItemDecoration {
     //分割线
     private int dividerHeight;
-
-    private int mOffsetMagin;
-
+    //两边间距设置
+    private int maginleftorRight;
     //定制分割线颜色
     private Paint dividerPaint;
 
 
-    public DividerItemDecoration(Context context) {
+    public DividerNormalDecoration(Context context) {
 
         dividerPaint = new Paint();
         dividerHeight = context.getResources().getDimensionPixelSize(R.dimen.divider_height);
         dividerPaint.setColor(context.getResources().getColor(R.color.dimgray));  //暗灰色
-        mOffsetMagin = (int) context.getResources().getDimension(R.dimen.divider_bottom);
+        maginleftorRight = context.getResources().getDimensionPixelSize(R.dimen.divider_magin);
     }
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        outRect.bottom = dividerHeight+mOffsetMagin;
+        outRect.bottom = dividerHeight;
     }
 
     @Override
@@ -46,12 +44,12 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         super.onDraw(c, parent, state);
         //画item的布局
         int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount ; i++) {  //最后一个也设置线，不要则 childCount-1
+        for (int i = 0; i < childCount; i++) {  //最后一个也设置线，不要则 childCount-1
             View view = parent.getChildAt(i);
-            float startx = parent.getPaddingLeft()+mOffsetMagin;
-            float starty = view.getBottom() + mOffsetMagin;
-            float stopx = startx + view.getWidth()-2*mOffsetMagin;
-            float stopy = view.getBottom() + mOffsetMagin;
+            float startx = parent.getPaddingLeft()+maginleftorRight;
+            float starty = view.getBottom();
+            float stopx = startx + view.getWidth()-2*maginleftorRight;
+            float stopy = view.getBottom();
             c.drawLine(startx,starty,stopx,stopy, dividerPaint);
         }
     }

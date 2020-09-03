@@ -1,16 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_Guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_Guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="10dp" />
+
+    <TextView
+        android:id="@+id/tv_share_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="用户名"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/left_Guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_share_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="时间1"
+        android:textSize="13sp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_share_user"
+        app:layout_constraintRight_toLeftOf="@id/tv_share_date_time" />
+    <TextView
+        android:id="@+id/tv_share_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_share_user"
+        app:layout_constraintEnd_toStartOf="@id/right_Guideline" />
+
     <TextView
         android:id="@+id/tv_home_item_title"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="标题"
-        android:textSize="20sp"
-        android:textColor="@color/green"
-        android:gravity="center"
-        tools:ignore="MissingConstraints" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/left_Guideline"
+        app:layout_constraintEnd_toStartOf="@id/right_Guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_share_user" />
+    <TextView
+        android:id="@+id/tv_super_chapterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="公众号"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/left_Guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_home_item_title"
+        />
+    <TextView
+        android:id="@+id/tv_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:text="/"
+        app:layout_constraintLeft_toRightOf="@id/tv_super_chapterName"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_super_chapterName"
+        />
+    <TextView
+        android:id="@+id/tv_chapterName"
+        android:layout_width="wrap_content"
+        android:textSize="13sp"
+        android:layout_height="wrap_content"
+        android:text="郭霖"
+        app:layout_constraintLeft_toRightOf="@id/tv_view"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_super_chapterName"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_item_title"
+        app:layout_constraintEnd_toStartOf="@id/right_Guideline"
+        android:src="@mipmap/heart"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

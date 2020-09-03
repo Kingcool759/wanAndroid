@@ -13,17 +13,24 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.adapter.BannerRecyclerViewAdapter;
+import com.example.wanandroid.adapter.DividerItemDecoration;
 import com.example.wanandroid.adapter.HomeListAdapter;
 import com.example.wanandroid.bean.ImageUrl;
 import com.example.wanandroid.databean.HomeListRes;
 import com.example.wanandroid.databinding.FragmentHomeBinding;
 import com.example.wanandroid.viewmodel.HomeViewModel;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
@@ -51,7 +58,7 @@ public class HomeFragment extends Fragment {
          */
         getBanner();
         /**
-         * 列表RecyclerView
+         * 首页——列表RecyclerView
          */
         mHomeList = new ArrayList();
         adapter = new HomeListAdapter(mHomeList);  //把从Api接口解析的数据json解析后的List<databean>传进去
@@ -60,6 +67,9 @@ public class HomeFragment extends Fragment {
         binding.rvList.setLayoutManager(layoutManager);  //一定要先于adapter设置
         binding.rvList.setAdapter(adapter);
         binding.rvList.setItemAnimator(new DefaultItemAnimator());
+        binding.rvList.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext())));
+        binding.rvList.setHasFixedSize(true);
+
         /**
          * 获取接口数据，实现首页列表数据装载
          */
@@ -68,6 +78,10 @@ public class HomeFragment extends Fragment {
             mHomeList.addAll(it);
             adapter.notifyDataSetChanged();
         });
+        /**
+         * 智能刷新
+         */
+        getRefresh();
         return binding.getRoot();
     }
 
@@ -87,6 +101,24 @@ public class HomeFragment extends Fragment {
         binding.banner.setLayoutManager(layoutManager); //先设置manager,再设置adapter
         binding.banner.setAdapter(adapter);
         binding.banner.setItemAnimator(new DefaultItemAnimator());
+        binding.banner.setHasFixedSize(true);
     }
 
+    /**
+     * 智能刷新
+     */
+    private void getRefresh(){
+//        binding.srlSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(RefreshLayout refreshlayout) {
+//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+//            }
+//        });
+//        binding.srlSmartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore(RefreshLayout refreshlayout) {
+//                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+//            }
+//        });
+    }
 }

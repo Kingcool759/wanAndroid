@@ -42,7 +42,8 @@ public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecycl
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 //        holder.bannerImage.setImageResource(Integer.parseInt(horItem.getImgUrl()));   //本地图片的设置方式
         //Glide.with(mContext).load(dataBean.getList_photo()).into(holder.iv_img);   //网络图片样式
-        Glide.with(context).load(imageUrlList.get(position).getImagePath()).into(holder.bannerImage);
+        BannerListRes.DataBean horItem = imageUrlList.get(position);
+        Glide.with(context).load(horItem.getImagePath()).into(holder.bannerImage);
     }
 
     @Override

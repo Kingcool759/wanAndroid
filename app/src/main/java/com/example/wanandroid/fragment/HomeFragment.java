@@ -58,27 +58,14 @@ public class HomeFragment extends Fragment {
         binding.setLifecycleOwner(this);
 
         /**
-         * 获取接口数据，实现首页数据装载
+         * 调用api接口获取数据
          */
         viewModel.getBannerViewList();
         viewModel.getHomePageList();
-        /**
-         * RecyclerView制作的banner轮播图-->之后使用ViewPager换掉
-         */
+
         getBanner();
-        /**
-         * 首页——列表RecyclerView
-         */
         getHomeList();
-
-        /**
-         * 接口回调数据
-         */
-        getCallBack();
-
-        /**
-         * 智能刷新
-         */
+        getDataCallBack();
         getRefresh();
         return binding.getRoot();
     }
@@ -114,9 +101,9 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * 回调数据
+     * 数据回调处理
      */
-    private void getCallBack(){
+    private void getDataCallBack(){
         //首页-banner
         viewModel.mBannerList.observe(getViewLifecycleOwner(),it->{
             mBannerList.addAll(it);

@@ -51,10 +51,19 @@ public class AnswerFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
-
         /**
-         * 问答——列表RecyclerView
+         * 调用api接口获取数据
          */
+        viewModel.getAnswerPageList();
+
+        getAnswerList();
+        getDateCallback();
+        return binding.getRoot();
+    }
+    /**
+     * 问答——列表
+     */
+    private void getAnswerList(){
         mAnswerList = new ArrayList();
         adapter = new AnswerListAdapter(mAnswerList);  //把从Api接口解析的数据json解析后的List<databean>传进去
         layoutManager = new LinearLayoutManager(getContext());
@@ -63,16 +72,14 @@ public class AnswerFragment extends Fragment {
         binding.rvAnswerList.setAdapter(adapter);
         binding.rvAnswerList.setItemAnimator(new DefaultItemAnimator());
         binding.rvAnswerList.addItemDecoration(new DividerNormalDecoration(Objects.requireNonNull(getContext())));
-
-        /**
-         * answer数据获取
-         */
-        viewModel.getAnswerPageList();
+    }
+    /**
+     * 数据回调处理
+     */
+    private void getDateCallback(){
         viewModel.mAnswerList.observe(getViewLifecycleOwner(),it->{
             mAnswerList.addAll(it);
             adapter.notifyDataSetChanged();
         });
-
-        return binding.getRoot();
     }
 }

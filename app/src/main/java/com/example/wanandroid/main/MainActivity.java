@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             @Override
             public void onLeftClick(View v) {
                 //菜单
-                ToastUtils.show("左项View被点击");
                 binding.drawerLayout.openDrawer(Gravity.START);
             }
 

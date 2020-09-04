@@ -24,6 +24,9 @@ import java.util.List;
 public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecyclerViewAdapter.MyViewHolder> {
     private Context context;
     private List<BannerListRes.DataBean> imageUrlList;
+    //点击事件
+    private BannerDataListener mBannerDataListener;
+    private String url = "";
 
     public BannerRecyclerViewAdapter(Context context,List<BannerListRes.DataBean> imageUrlList) {
         this.imageUrlList = imageUrlList;
@@ -44,6 +47,7 @@ public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecycl
         //Glide.with(mContext).load(dataBean.getList_photo()).into(holder.iv_img);   //网络图片样式
         BannerListRes.DataBean horItem = imageUrlList.get(position);
         Glide.with(context).load(horItem.getImagePath()).into(holder.bannerImage);
+        url = horItem.getUrl();
     }
 
     @Override
@@ -53,12 +57,24 @@ public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecycl
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        //轮播图
+        //图片
         public ImageView bannerImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             bannerImage = itemView.findViewById(R.id.iv_banner_item_image);
+            //点击事件
+            bannerImage.setOnClickListener((View)-> {
+               mBannerDataListener.getBannerData(url);
+            });
         }
+    }
+
+    //回调事件
+    public interface BannerDataListener{
+        void getBannerData(String link);
+    }
+    public void setBannerDataListener(BannerDataListener bannerDataListener) {
+        mBannerDataListener = bannerDataListener;
     }
 }

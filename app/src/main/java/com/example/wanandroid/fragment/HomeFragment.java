@@ -1,5 +1,6 @@
 package com.example.wanandroid.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
+import com.example.wanandroid.activity.WebViewActivity;
 import com.example.wanandroid.adapter.BannerRecyclerViewAdapter;
 import com.example.wanandroid.adapter.DividerItemDecoration;
 import com.example.wanandroid.adapter.HomeListAdapter;
@@ -67,6 +69,7 @@ public class HomeFragment extends Fragment {
         getHomeList();
         getDataCallBack();
         getRefresh();
+
         return binding.getRoot();
     }
 
@@ -107,6 +110,18 @@ public class HomeFragment extends Fragment {
         //首页-banner
         viewModel.mBannerList.observe(getViewLifecycleOwner(),it->{
             mBannerList.addAll(it);
+            //获取点击事件数据
+            bannerAdapter.setBannerDataListener(new BannerRecyclerViewAdapter.BannerDataListener() {
+                @Override
+                public void getBannerData(String link) {
+                    //fragment向activity跳转，并且携带link数据过去
+                    Intent intent = new Intent();
+                    intent.setClass(Objects.requireNonNull(getContext()),WebViewActivity.class);
+                    intent.putExtra("bannerLinkUrl",link);
+                    startActivity(intent);
+                    bannerAdapter.notifyDataSetChanged();
+                }
+            });
             bannerAdapter.notifyDataSetChanged();
         });
 

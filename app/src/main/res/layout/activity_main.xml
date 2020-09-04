@@ -94,6 +94,7 @@
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+                app:itemIconTint="@color/blue"
                 app:headerLayout="@layout/activity_slide_drawer"
                 app:menu="@menu/menu_drawer_left"/>
             </androidx.drawerlayout.widget.DrawerLayout>

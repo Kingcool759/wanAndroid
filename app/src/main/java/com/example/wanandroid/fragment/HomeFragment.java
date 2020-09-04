@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
@@ -55,10 +56,15 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         //使用databinding绑定viewmodel
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,true);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, true);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
+        getBanner();
+        getHomeList();
+        getDataCallBack();
+        getRefresh();
 
         /**
          * 调用api接口获取数据
@@ -66,21 +72,18 @@ public class HomeFragment extends Fragment {
         viewModel.getBannerViewList();
         viewModel.getHomePageList();
 
-        getBanner();
-        getHomeList();
-        getDataCallBack();
-        getRefresh();
-
         return binding.getRoot();
     }
 
     /***
      * 首页——轮播图
      */
-    private void getBanner(){
+    private void getBanner() {
         mBannerList = new ArrayList();
         //Recyclerview
         bannerAdapter = new BannerRecyclerViewAdapter(getContext(), mBannerList);
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(binding.banner);
         bannerLayoutManager = new LinearLayoutManager(getContext());
         bannerLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         binding.banner.setLayoutManager(bannerLayoutManager); //先设置manager,再设置adapter
@@ -92,7 +95,7 @@ public class HomeFragment extends Fragment {
     /**
      * 首页-列表
      */
-    private void getHomeList(){
+    private void getHomeList() {
         mHomeList = new ArrayList();
         homeAdapter = new HomeListAdapter(mHomeList);  //把从Api接口解析的数据json解析后的List<databean>传进去
         homeLayoutManager = new LinearLayoutManager(getContext());
@@ -107,51 +110,46 @@ public class HomeFragment extends Fragment {
     /**
      * 数据回调处理
      */
-    private void getDataCallBack(){
+    private void getDataCallBack() {
         //首页-banner
-        viewModel.mBannerList.observe(getViewLifecycleOwner(),it->{
+        viewModel.mBannerList.observe(getViewLifecycleOwner(), it -> {
             mBannerList.addAll(it);
-            //获取点击事件数据
-            bannerAdapter.setBannerDataListener(new BannerRecyclerViewAdapter.BannerDataListener() {
-                @Override
-                public void getBannerData(String title,String link) {
-                    //fragment向activity跳转，并且携带link数据过去
-                    Intent intent = new Intent();
-                    intent.setClass(Objects.requireNonNull(getContext()),WebViewActivity.class);
-                    intent.putExtra("bannertitle",title);
-                    intent.putExtra("bannerLinkUrl",link);
-                    startActivity(intent);
-                    bannerAdapter.notifyDataSetChanged();
-                }
-            });
             bannerAdapter.notifyDataSetChanged();
+        });
+        //获取点击事件数据
+        bannerAdapter.setBannerDataListener((title, link) -> {
+            //fragment向activity跳转，并且携带link数据过去
+            Intent intent = new Intent();
+            intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
+            intent.putExtra("bannertitle", title);
+            intent.putExtra("bannerLinkUrl", link);
+            startActivity(intent);
         });
 
         //首页-列表
-        viewModel.mHomeList.observe(getViewLifecycleOwner(),it->{   //lambda表达式
+        viewModel.mHomeList.observe(getViewLifecycleOwner(), it -> {   //lambda表达式
             mHomeList.addAll(it);
-            //获取点击事件数据
-            homeAdapter.setBannerDataListener(new HomeListAdapter.BannerDataListener() {
-                @Override
-                public void getBannerData(String title, String link) {
-                    //fragment向activity跳转，并且携带link数据过去
-                    Intent intent = new Intent();
-                    intent.setClass(Objects.requireNonNull(getContext()),WebViewActivity.class);
-                    intent.putExtra("bannertitle",title);
-                    intent.putExtra("bannerLinkUrl",link);
-                    startActivity(intent);
-                    homeAdapter.notifyDataSetChanged();
-                }
-            });
-
             homeAdapter.notifyDataSetChanged();
+        });
+        //获取点击事件数据
+        homeAdapter.setBannerDataListener(new HomeListAdapter.BannerDataListener() {
+            @Override
+            public void getBannerData(String title, String link) {
+                //fragment向activity跳转，并且携带link数据过去
+                Intent intent = new Intent();
+                intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
+                intent.putExtra("bannertitle", title);
+                intent.putExtra("bannerLinkUrl", link);
+                startActivity(intent);
+                //homeAdapter.notifyDataSetChanged();
+            }
         });
     }
 
     /**
      * 智能刷新
      */
-    private void getRefresh(){
+    private void getRefresh() {
 //        binding.srlSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 //            @Override
 //            public void onRefresh(RefreshLayout refreshlayout) {

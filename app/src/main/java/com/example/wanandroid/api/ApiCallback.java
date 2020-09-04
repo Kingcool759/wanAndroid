@@ -13,7 +13,7 @@ public abstract class ApiCallback<T> implements Callback<T> {
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         int statusCode = response.code();
-        onSuccessful(call, response);
+
         if (statusCode >= 100 && statusCode <= 101) {
             onFail("出错了，请重试!!!");
         } else if (statusCode >= 300 && statusCode <= 307) {
@@ -33,7 +33,6 @@ public abstract class ApiCallback<T> implements Callback<T> {
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
-        t.printStackTrace();
         onFail(t.getMessage());
     }
 

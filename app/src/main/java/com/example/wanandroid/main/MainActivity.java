@@ -5,7 +5,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -123,10 +125,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     //自定义TitleBar的点击事件
     private void onClickTitleBar(){
         binding.titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onLeftClick(View v) {
-                //返回键
+                //菜单
                 ToastUtils.show("左项View被点击");
+                binding.drawerLayout.openDrawer(Gravity.START);
             }
 
             @Override

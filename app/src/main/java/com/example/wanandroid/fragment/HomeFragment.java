@@ -19,6 +19,7 @@ import com.example.wanandroid.adapter.BannerRecyclerViewAdapter;
 import com.example.wanandroid.adapter.DividerItemDecoration;
 import com.example.wanandroid.adapter.HomeListAdapter;
 import com.example.wanandroid.bean.ImageUrl;
+import com.example.wanandroid.databean.BannerListRes;
 import com.example.wanandroid.databean.HomeListRes;
 import com.example.wanandroid.databinding.FragmentHomeBinding;
 import com.example.wanandroid.viewmodel.HomeViewModel;
@@ -31,10 +32,16 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private HomeViewModel viewModel;
 
-    //首页列表RecyclerView
+    //首页RecyclerView
+    //banner
+    private List<BannerListRes.DataBean> mBannerList;
+    private LinearLayoutManager bannerLayoutManager;
+    private BannerRecyclerViewAdapter bannerAdapter;
+
+    //列表
     private List<HomeListRes.DataBean.DatasBean> mHomeList;
-    private LinearLayoutManager layoutManager;
-    private HomeListAdapter adapter;
+    private LinearLayoutManager homeLayoutManager;
+    private HomeListAdapter homeAdapter;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -43,11 +50,18 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        //使用databinding
+
+        //使用databinding绑定viewmodel
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,true);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
+        /**
+         * 获取接口数据，实现首页数据装载
+         */
+        viewModel.getBannerViewList();
+        viewModel.getHomePageList();
         /**
          * RecyclerView制作的banner轮播图-->之后使用ViewPager换掉
          */
@@ -55,24 +69,13 @@ public class HomeFragment extends Fragment {
         /**
          * 首页——列表RecyclerView
          */
-        mHomeList = new ArrayList();
-        adapter = new HomeListAdapter(mHomeList);  //把从Api接口解析的数据json解析后的List<databean>传进去
-        layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        binding.rvList.setLayoutManager(layoutManager);  //一定要先于adapter设置
-        binding.rvList.setAdapter(adapter);
-        binding.rvList.setItemAnimator(new DefaultItemAnimator());
-        binding.rvList.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext())));
-        binding.rvList.setHasFixedSize(true);
+        getHomeList();
 
         /**
-         * 获取接口数据，实现首页列表数据装载
+         * 接口回调数据
          */
-        viewModel.getHomePageList();
-        viewModel.mHomeList.observe(getViewLifecycleOwner(),it->{
-            mHomeList.addAll(it);
-            adapter.notifyDataSetChanged();
-        });
+        getCallBack();
+
         /**
          * 智能刷新
          */
@@ -80,23 +83,51 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
-
     /***
      * 首页——轮播图
      */
     private void getBanner(){
-        List<ImageUrl> imageUrlList = new ArrayList();
-        for(int i = 1 ; i < 5 ; i++){
-            imageUrlList.add(new ImageUrl("https://www.wanandroid.com/blogimgs/bb0747bd-f59f-4733-8d29-0735502f0c6c.png"));
-        }
+        mBannerList = new ArrayList();
         //Recyclerview
-        BannerRecyclerViewAdapter adapter = new BannerRecyclerViewAdapter(getContext(), imageUrlList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        binding.banner.setLayoutManager(layoutManager); //先设置manager,再设置adapter
-        binding.banner.setAdapter(adapter);
+        bannerAdapter = new BannerRecyclerViewAdapter(getContext(), mBannerList);
+        bannerLayoutManager = new LinearLayoutManager(getContext());
+        bannerLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        binding.banner.setLayoutManager(bannerLayoutManager); //先设置manager,再设置adapter
+        binding.banner.setAdapter(bannerAdapter);
         binding.banner.setItemAnimator(new DefaultItemAnimator());
         binding.banner.setHasFixedSize(true);
+    }
+
+    /**
+     * 首页-列表
+     */
+    private void getHomeList(){
+        mHomeList = new ArrayList();
+        homeAdapter = new HomeListAdapter(mHomeList);  //把从Api接口解析的数据json解析后的List<databean>传进去
+        homeLayoutManager = new LinearLayoutManager(getContext());
+        homeLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        binding.rvList.setLayoutManager(homeLayoutManager);  //一定要先于adapter设置
+        binding.rvList.setAdapter(homeAdapter);
+        binding.rvList.setItemAnimator(new DefaultItemAnimator());
+        binding.rvList.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext())));
+        binding.rvList.setHasFixedSize(true);
+    }
+
+    /**
+     * 回调数据
+     */
+    private void getCallBack(){
+        //首页-banner
+        viewModel.mBannerList.observe(getViewLifecycleOwner(),it->{
+            mBannerList.addAll(it);
+            bannerAdapter.notifyDataSetChanged();
+        });
+
+        //首页-列表
+        viewModel.mHomeList.observe(getViewLifecycleOwner(),it->{
+            mHomeList.addAll(it);
+            homeAdapter.notifyDataSetChanged();
+        });
     }
 
     /**

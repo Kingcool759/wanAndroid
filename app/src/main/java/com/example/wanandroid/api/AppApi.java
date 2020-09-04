@@ -9,6 +9,11 @@ public class AppApi {
     public static String BaseURL= "https://www.wanandroid.com/";
 
     /**
+     *  获取banner
+     */
+    public static final String BANNER_LIST = "banner/json";
+
+    /**
      *  获取home列表
      */
     public static final String HOME_LIST = "article/list/0/json";

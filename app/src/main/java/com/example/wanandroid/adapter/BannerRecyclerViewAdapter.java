@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.wanandroid.R;
 import com.example.wanandroid.bean.ImageUrl;
+import com.example.wanandroid.databean.BannerListRes;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ import java.util.List;
  */
 public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecyclerViewAdapter.MyViewHolder> {
     private Context context;
-    private List<ImageUrl> imageUrlList;
+    private List<BannerListRes.DataBean> imageUrlList;
 
-    public BannerRecyclerViewAdapter(Context context,List<ImageUrl> imageUrlList) {
+    public BannerRecyclerViewAdapter(Context context,List<BannerListRes.DataBean> imageUrlList) {
         this.imageUrlList = imageUrlList;
         this.context = context;
     }
@@ -39,10 +40,9 @@ public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        ImageUrl horItem = imageUrlList.get(position);
 //        holder.bannerImage.setImageResource(Integer.parseInt(horItem.getImgUrl()));   //本地图片的设置方式
-        Glide.with(context).load(horItem.getImgUrl()).into(holder.bannerImage);
-        //Glide.with(mContext).load(dataBean.getList_photo()).into(holder.iv_img);   //样式
+        //Glide.with(mContext).load(dataBean.getList_photo()).into(holder.iv_img);   //网络图片样式
+        Glide.with(context).load(imageUrlList.get(position).getImagePath()).into(holder.bannerImage);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.wanandroid.api;
 
 import com.example.wanandroid.api.AppApi;
 import com.example.wanandroid.databean.AnswerListRes;
+import com.example.wanandroid.databean.BannerListRes;
 import com.example.wanandroid.databean.HomeListRes;
 
 import retrofit2.Call;
@@ -13,6 +14,11 @@ import retrofit2.http.GET;
  * @describe
  */
 public interface AppApiService {
+    /**
+     *  获取banner
+     */
+    @GET(AppApi.BANNER_LIST)
+    Call<BannerListRes> getBannerList();
 
     /**
      * 获取home列表
@@ -27,4 +33,5 @@ public interface AppApiService {
      */
     @GET(AppApi.ANSWER_LIST)
     Call<AnswerListRes> getAnswerList();
+
 }

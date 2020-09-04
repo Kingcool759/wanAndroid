@@ -2,6 +2,7 @@ package com.example.wanandroid.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,10 +114,11 @@ public class HomeFragment extends Fragment {
             //获取点击事件数据
             bannerAdapter.setBannerDataListener(new BannerRecyclerViewAdapter.BannerDataListener() {
                 @Override
-                public void getBannerData(String link) {
+                public void getBannerData(String title,String link) {
                     //fragment向activity跳转，并且携带link数据过去
                     Intent intent = new Intent();
                     intent.setClass(Objects.requireNonNull(getContext()),WebViewActivity.class);
+                    intent.putExtra("bannertitle",title);
                     intent.putExtra("bannerLinkUrl",link);
                     startActivity(intent);
                     bannerAdapter.notifyDataSetChanged();
@@ -126,8 +128,22 @@ public class HomeFragment extends Fragment {
         });
 
         //首页-列表
-        viewModel.mHomeList.observe(getViewLifecycleOwner(),it->{
+        viewModel.mHomeList.observe(getViewLifecycleOwner(),it->{   //lambda表达式
             mHomeList.addAll(it);
+            //获取点击事件数据
+            homeAdapter.setBannerDataListener(new HomeListAdapter.BannerDataListener() {
+                @Override
+                public void getBannerData(String title, String link) {
+                    //fragment向activity跳转，并且携带link数据过去
+                    Intent intent = new Intent();
+                    intent.setClass(Objects.requireNonNull(getContext()),WebViewActivity.class);
+                    intent.putExtra("bannertitle",title);
+                    intent.putExtra("bannerLinkUrl",link);
+                    startActivity(intent);
+                    homeAdapter.notifyDataSetChanged();
+                }
+            });
+
             homeAdapter.notifyDataSetChanged();
         });
     }

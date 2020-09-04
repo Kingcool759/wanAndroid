@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
@@ -22,6 +23,8 @@ import java.util.List;
  */
 public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.MyViewHolder> {
     private List<AnswerListRes.DataBean.DatasBean> datalist;
+    //点击事件
+    private BannerDataListener mBannerDataListener;
 
     public AnswerListAdapter(List<AnswerListRes.DataBean.DatasBean> dataList) {
         this.datalist = dataList;
@@ -48,6 +51,13 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
 
         holder.tvSuperChapterName.setText(dataBean.getSuperChapterName());
         holder.tvChapterName.setText(dataBean.getChapterName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBannerDataListener.getBannerData(datalist.get(position).getTitle(),datalist.get(position).getLink());
+            }
+        });
     }
 
     @Override
@@ -78,5 +88,12 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
             tvSuperChapterName = itemView.findViewById(R.id.tv_answer_super_chapterName);
             tvChapterName = itemView.findViewById(R.id.tv_answer_chapterName);
         }
+    }
+    //回调事件
+    public interface BannerDataListener{
+        void getBannerData(String title, String link);
+    }
+    public void setBannerDataListener(BannerDataListener bannerDataListener) {
+        mBannerDataListener = bannerDataListener;
     }
 }

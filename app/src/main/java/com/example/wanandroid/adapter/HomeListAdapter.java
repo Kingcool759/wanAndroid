@@ -1,12 +1,14 @@
 package com.example.wanandroid.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
@@ -23,6 +25,8 @@ import java.util.List;
  */
 public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyViewHolder> {
     private List<HomeListRes.DataBean.DatasBean> datalist;
+    //点击事件
+    private BannerDataListener mBannerDataListener;
 
     public HomeListAdapter(List<HomeListRes.DataBean.DatasBean> dataList) {
         this.datalist = dataList;
@@ -49,6 +53,13 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
 //        holder.tvTime.setText(dataBean.getNiceShareDate());  //几天前
         holder.tvSuperChapterName.setText(dataBean.getSuperChapterName());
         holder.tvChapterName.setText(dataBean.getChapterName());
+        //点击事件处理
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBannerDataListener.getBannerData(datalist.get(position).getTitle(), datalist.get(position).getLink());
+            }
+        });
     }
 
     @Override
@@ -79,5 +90,13 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
             tvSuperChapterName = itemView.findViewById(R.id.tv_super_chapterName);
             tvChapterName = itemView.findViewById(R.id.tv_chapterName);
         }
+    }
+
+    //回调事件
+    public interface BannerDataListener{
+        void getBannerData(String title, String link);
+    }
+    public void setBannerDataListener(BannerDataListener bannerDataListener) {
+        mBannerDataListener = bannerDataListener;
     }
 }

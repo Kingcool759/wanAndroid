@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -14,15 +15,14 @@
         tools:context=".fragment.PublicViewPagerFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            items = "@{viewMoedl.items}"
+            itemBinding = "@{viewMoedl.itemBinding}"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green" />
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="sfhsljklajdkjfsljdljf"
-            android:textSize="20dp" />
 
     </FrameLayout>
 </layout>

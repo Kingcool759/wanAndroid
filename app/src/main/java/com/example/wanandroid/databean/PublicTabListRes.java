@@ -7,7 +7,7 @@ import java.util.List;
  * @auther
  * @describe
  */
-public class PublicAccountListRes extends BaseResponse {
+public class PublicTabListRes extends BaseResponse {
 
     private List<DataBean> data;
 

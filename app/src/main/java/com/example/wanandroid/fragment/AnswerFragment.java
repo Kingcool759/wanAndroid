@@ -85,11 +85,6 @@ public class AnswerFragment extends Fragment {
                     //fragment向activity跳转，并且携带link数据过去
                     Intent intent = new Intent();
                     intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
-
-                    Log.d( "ceshi: ",title);
-
-                    Log.d( "ceshi: ",link);
-
                     intent.putExtra("bannertitle",title);
                     intent.putExtra("bannerLinkUrl",link);
                     startActivity(intent);

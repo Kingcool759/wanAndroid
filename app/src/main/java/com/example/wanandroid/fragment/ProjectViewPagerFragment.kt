@@ -11,10 +11,6 @@ import com.example.wanandroid.viewmodel.ProjectViewPagerViewModel
 
 class ProjectViewPagerFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ProjectViewPagerFragment()
-    }
-
     private lateinit var viewModel: ProjectViewPagerViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -28,6 +28,12 @@ public class AppApi {
      */
     public static final String PUBLIC_TAB_LIST = "wxarticle/chapters/json";
 
+
+    /**
+     *  获取公众号数据列表（参数为id）
+     */
+    public static final String PUBLIC_DATA_LIST = "wxarticle/list/{id}/1/json";
+
     /**
      *  获取项目tab列表
      */

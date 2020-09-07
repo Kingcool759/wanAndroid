@@ -64,7 +64,7 @@ public class ProjectFragment extends Fragment {
      */
     private void setTabAndViewPager(){
         for(int i =0 ; i < title_list.size(); i++){
-            list_fragment.add(new PublicViewPagerFragment());
+            list_fragment.add(new ProjectViewPagerFragment());
             binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
         }
         //绑定适配器

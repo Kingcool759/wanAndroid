@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,20 +18,17 @@ import android.view.ViewGroup;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.adapter.DividerItemDecoration;
-import com.example.wanandroid.adapter.DividerNormalDecoration;
-import com.example.wanandroid.databean.PublicDataListRes;
-import com.example.wanandroid.databinding.PublicViewPagerFragmentBinding;
-import com.example.wanandroid.viewmodel.PublicViewModel;
+import com.example.wanandroid.databinding.FragmentPublicViewpagerBinding;
 import com.example.wanandroid.viewmodel.PublicViewPagerViewModel;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class PublicViewPagerFragment extends Fragment {
-    private PublicViewPagerFragmentBinding binding;
+    private FragmentPublicViewpagerBinding binding;
     private PublicViewPagerViewModel viewModel;
+    //定义id
+    private String id = "";
 
     public static PublicViewPagerFragment newInstance(String id) {
         PublicViewPagerFragment publicViewPagerFragment = new PublicViewPagerFragment();
@@ -45,9 +41,12 @@ public class PublicViewPagerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.public_view_pager_fragment, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_public_viewpager, container, false);
         Bundle arguments = getArguments();
-        String id = arguments.getString("id");
+        //加判断，防止空指针异常
+        if (arguments!=null){
+        id = arguments.getString("id");
+        }
         Log.d("id ----> ", id);
         //使用此方法将id传给其viewmodel用于按参数id调用api接口获取数据。——————————viewmodel Factory
         viewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {

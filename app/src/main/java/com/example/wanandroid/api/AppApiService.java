@@ -4,6 +4,7 @@ import com.example.wanandroid.api.AppApi;
 import com.example.wanandroid.databean.AnswerListRes;
 import com.example.wanandroid.databean.BannerListRes;
 import com.example.wanandroid.databean.HomeListRes;
+import com.example.wanandroid.databean.PublicAccountListRes;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -34,4 +35,9 @@ public interface AppApiService {
     @GET(AppApi.ANSWER_LIST)
     Call<AnswerListRes> getAnswerList();
 
+    /**
+     * 获取public公众号列表
+     */
+    @GET(AppApi.PUBLIC_ACCOUNT_LIST)
+    Call<PublicAccountListRes> getPublicAccountList();
 }

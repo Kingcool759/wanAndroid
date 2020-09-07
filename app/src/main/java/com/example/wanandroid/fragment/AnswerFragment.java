@@ -51,7 +51,7 @@ public class AnswerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_answer, container, true);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_answer, container, false);
         viewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);

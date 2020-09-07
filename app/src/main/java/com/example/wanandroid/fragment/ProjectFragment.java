@@ -1,5 +1,6 @@
 package com.example.wanandroid.fragment;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -13,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wanandroid.R;
+import com.example.wanandroid.databinding.FragmentProjectBinding;
+import com.example.wanandroid.databinding.FragmentPublicBinding;
 import com.example.wanandroid.viewmodel.ProjectViewModel;
+import com.example.wanandroid.viewmodel.PublicViewModel;
 
 public class ProjectFragment extends Fragment {
-
-    private ProjectViewModel mViewModel;
+    private FragmentProjectBinding binding;
+    private ProjectViewModel viewModel;
 
     public static ProjectFragment newInstance() {
         return new ProjectFragment();
@@ -26,14 +30,10 @@ public class ProjectFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_project, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_project,container,false);
+        viewModel = ViewModelProviders.of(this).get(ProjectViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ProjectViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
 }

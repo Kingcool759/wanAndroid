@@ -1,40 +1,80 @@
 package com.example.wanandroid.fragment;
 
-import androidx.lifecycle.ViewModelProviders;
-
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanandroid.R;
+import com.example.wanandroid.adapter.PublicTabAdapter;
+import com.example.wanandroid.databinding.FragmentPublicBinding;
 import com.example.wanandroid.viewmodel.PublicViewModel;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class PublicFragment extends Fragment {
-
-    private PublicViewModel mViewModel;
-
-    public static PublicFragment newInstance() {
-        return new PublicFragment();
-    }
+    private FragmentPublicBinding binding;
+    private PublicViewModel viewModel;
+    //定义
+    private PublicTabAdapter adapter;
+    private ArrayList<Fragment> list_fragment = new ArrayList<>(); //定义要装frament的列表
+    private List<String> title_list = new ArrayList<>();  //定义title列表
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_public, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_public,container,false);
+        viewModel = ViewModelProviders.of(this).get(PublicViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
+
+        //获取获取api接口数据
+        viewModel.getPublicWexinList();
+        getDataCallback();
+
+        return binding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PublicViewModel.class);
-        // TODO: Use the ViewModel
-
+    /**
+     *  获取接口数据，将title数据添加进要用的list中
+     */
+    private void getDataCallback(){
+        viewModel.mPublicAccountList.observe(getViewLifecycleOwner(),it->{
+            for(int i =1 ; i< it.size();i++){
+                title_list.add(it.get(i).getName());
+            }
+            setTabAndViewPager();
+        });
     }
 
+    /**
+     *  使用titlelist,设置tabs
+     */
+    private void setTabAndViewPager(){
+        for(int i =0 ; i < title_list.size(); i++){
+            list_fragment.add(new PublicViewPagerFragment());
+            binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
+        }
+        //绑定适配器
+        adapter = new PublicTabAdapter(getChildFragmentManager(),list_fragment,title_list);
+        //viewpager加载adapter
+        binding.viewPager.setAdapter(adapter);
+        //TabLayout加载viewpager
+        binding.tablayout.setupWithViewPager(binding.viewPager);
+    }
 }

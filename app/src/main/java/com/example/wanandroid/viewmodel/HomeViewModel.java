@@ -17,7 +17,6 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
     // 首页-Banner
     public MutableLiveData<List<BannerListRes.DataBean>> mBannerList = new MutableLiveData<>();
 

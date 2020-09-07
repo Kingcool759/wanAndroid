@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         //使用databinding绑定viewmodel
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, true);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);

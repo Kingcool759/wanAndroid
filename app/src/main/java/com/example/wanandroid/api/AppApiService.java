@@ -4,6 +4,7 @@ import com.example.wanandroid.api.AppApi;
 import com.example.wanandroid.databean.AnswerListRes;
 import com.example.wanandroid.databean.BannerListRes;
 import com.example.wanandroid.databean.HomeListRes;
+import com.example.wanandroid.databean.ProjectTabListRes;
 import com.example.wanandroid.databean.PublicAccountListRes;
 
 import retrofit2.Call;
@@ -36,8 +37,14 @@ public interface AppApiService {
     Call<AnswerListRes> getAnswerList();
 
     /**
-     * 获取public公众号列表
+     * 获取公众号tab列表
      */
-    @GET(AppApi.PUBLIC_ACCOUNT_LIST)
-    Call<PublicAccountListRes> getPublicAccountList();
+    @GET(AppApi.PUBLIC_TAB_LIST)
+    Call<PublicAccountListRes> getPublicTabList();
+
+    /**
+     * 获取项目tab列表
+     */
+    @GET(AppApi.PROJECT_TAB_LIST)
+    Call<ProjectTabListRes> getProjectTabList();
 }

@@ -18,20 +18,20 @@ import retrofit2.Response;
 
 public class PublicViewModel extends ViewModel {
 
-    public MutableLiveData<List<PublicAccountListRes.DataBean>> mPublicAccountList = new MutableLiveData<>();
+    public MutableLiveData<List<PublicAccountListRes.DataBean>> mPublicTabList = new MutableLiveData<>();
 
     /**
      * 获取公众号tab
      */
-    public void getPublicWexinList() {
-        NetworkPortal.getService(AppApiService.class).getPublicAccountList().enqueue(new ApiCallback<PublicAccountListRes>() {
+    public void getPublicTabTitleList() {
+        NetworkPortal.getService(AppApiService.class).getPublicTabList().enqueue(new ApiCallback<PublicAccountListRes>() {
             @Override
             public void onSuccessful(Call<PublicAccountListRes> call, Response<PublicAccountListRes> response) {
                 Log.d("onSuccessful", "请求成功了！");
                 if (response == null || response.body() == null) {
                     return;
                 }else {
-                    mPublicAccountList.setValue(response.body().getData());
+                    mPublicTabList.setValue(response.body().getData());
                 }
             }
 

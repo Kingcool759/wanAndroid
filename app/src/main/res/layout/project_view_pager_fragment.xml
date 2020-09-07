@@ -4,14 +4,14 @@
 
     <data>
         <variable
-            name="viewMoedl"
-            type="com.example.wanandroid.viewmodel.PublicViewPagerViewModel" />
+            name="viewModel"
+            type="com.example.wanandroid.viewmodel.ProjectViewPagerViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.PublicViewPagerFragment">
+        tools:context=".fragment.ProjectViewPagerFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

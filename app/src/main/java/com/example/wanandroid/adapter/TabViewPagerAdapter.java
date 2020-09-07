@@ -14,11 +14,11 @@ import java.util.List;
  * @auther
  * @describe
  */
-public class PublicTabAdapter extends FragmentPagerAdapter {
+public class TabViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> list_fragment; // fragment列表
     private List<String> list_Title; // tab名的列表
 
-    public PublicTabAdapter(FragmentManager fm, List<Fragment> list_fragment, List<String> list_Title){
+    public TabViewPagerAdapter(FragmentManager fm, List<Fragment> list_fragment, List<String> list_Title){
         super(fm);
         this.list_fragment = list_fragment;
         this.list_Title = list_Title;

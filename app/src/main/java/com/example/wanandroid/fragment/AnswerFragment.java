@@ -43,11 +43,6 @@ public class AnswerFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private AnswerListAdapter answerAdapter;
 
-
-    public static AnswerFragment newInstance() {
-        return new AnswerFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

@@ -1,37 +1,29 @@
 package com.example.wanandroid.fragment;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanandroid.R;
-import com.example.wanandroid.adapter.PublicTabAdapter;
+import com.example.wanandroid.adapter.TabViewPagerAdapter;
 import com.example.wanandroid.databinding.FragmentPublicBinding;
 import com.example.wanandroid.viewmodel.PublicViewModel;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class PublicFragment extends Fragment {
     private FragmentPublicBinding binding;
     private PublicViewModel viewModel;
-    //定义
-    private PublicTabAdapter adapter;
+    //tablayout
+    private TabViewPagerAdapter tabAdapter;
     private ArrayList<Fragment> list_fragment = new ArrayList<>(); //定义要装frament的列表
     private List<String> title_list = new ArrayList<>();  //定义title列表
 
@@ -44,7 +36,7 @@ public class PublicFragment extends Fragment {
         binding.setLifecycleOwner(this);
 
         //获取获取api接口数据
-        viewModel.getPublicWexinList();
+        viewModel.getPublicTabTitleList();
         getDataCallback();
 
         return binding.getRoot();
@@ -54,7 +46,7 @@ public class PublicFragment extends Fragment {
      *  获取接口数据，将title数据添加进要用的list中
      */
     private void getDataCallback(){
-        viewModel.mPublicAccountList.observe(getViewLifecycleOwner(),it->{
+        viewModel.mPublicTabList.observe(getViewLifecycleOwner(),it->{
             for(int i =1 ; i< it.size();i++){
                 title_list.add(it.get(i).getName());
             }
@@ -71,10 +63,36 @@ public class PublicFragment extends Fragment {
             binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
         }
         //绑定适配器
-        adapter = new PublicTabAdapter(getChildFragmentManager(),list_fragment,title_list);
+        tabAdapter = new TabViewPagerAdapter(getChildFragmentManager(),list_fragment,title_list);
         //viewpager加载adapter
-        binding.viewPager.setAdapter(adapter);
+        binding.viewPager.setAdapter(tabAdapter);
         //TabLayout加载viewpager
         binding.tablayout.setupWithViewPager(binding.viewPager);
+
+//        //点击事件处理，变换当前点击的tab字体颜色
+//        binding.tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                //选中时
+//                View view = tab.getCustomView();
+//                if (view instanceof TextView) {
+//                    ((TextView) view).setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.green));
+//                }
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//                //未选中时
+//                View view = tab.getCustomView();
+//                if (view instanceof TextView) {
+//                    ((TextView) view).setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.gray));
+//                }
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
     }
 }

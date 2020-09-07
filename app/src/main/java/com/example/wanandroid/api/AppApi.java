@@ -24,7 +24,12 @@ public class AppApi {
     public static final String ANSWER_LIST = "wenda/list/1/json";
 
     /**
-     *  获取公众号列表
+     *  获取公众号tab列表
      */
-    public static final String PUBLIC_ACCOUNT_LIST = "wxarticle/chapters/json";
+    public static final String PUBLIC_TAB_LIST = "wxarticle/chapters/json";
+
+    /**
+     *  获取项目tab列表
+     */
+    public static final String PROJECT_TAB_LIST = "project/tree/json";
 }

@@ -47,10 +47,6 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager homeLayoutManager;
     private HomeListAdapter homeAdapter;
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

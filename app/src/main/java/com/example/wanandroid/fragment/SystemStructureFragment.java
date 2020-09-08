@@ -21,14 +21,14 @@ import com.example.wanandroid.adapter.SystemListAdapter;
 import com.example.wanandroid.databean.SystemDataListRes;
 
 import com.example.wanandroid.databinding.FragmentSystemStructureBinding;
-import com.example.wanandroid.viewmodel.SystemViewPagerViewModel;
+import com.example.wanandroid.viewmodel.SystemStructurerViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SystemStructureFragment extends Fragment {
     private FragmentSystemStructureBinding binding;
-    private SystemViewPagerViewModel viewModel;
+    private SystemStructurerViewModel viewModel;
 
     //recyclerview
     private List<SystemDataListRes.DataBean> itemTitles;
@@ -39,7 +39,7 @@ public class SystemStructureFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_system_structure, container, false);
-        viewModel = ViewModelProviders.of(this).get(SystemViewPagerViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(SystemStructurerViewModel.class);
         binding.setVariable(BR.viewModel,viewModel);  //找不到setViewModel的写法
 //        binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);

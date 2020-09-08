@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.wanandroid.viewmodel.SystemViewPagerViewModel" />
+            type="com.example.wanandroid.viewmodel.SystemStructurerViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

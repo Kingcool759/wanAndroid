@@ -21,7 +21,7 @@ import retrofit2.Response;
  * @auther
  * @describe
  */
-public class SystemViewPagerViewModel extends ViewModel {
+public class SystemStructurerViewModel extends ViewModel {
 
     public MutableLiveData<List<SystemDataListRes.DataBean>> mSystemDataList = new MutableLiveData<>();
 

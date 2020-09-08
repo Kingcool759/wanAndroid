@@ -38,4 +38,10 @@ public class AppApi {
      *  获取项目tab列表
      */
     public static final String PROJECT_TAB_LIST = "project/tree/json";
+
+    /**
+     *  获取项目数据列表（参数为id）
+     */
+    public static final String PROJECT_DATA_LIST = "project/list/1/json";
+
 }

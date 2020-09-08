@@ -1,31 +1,23 @@
 package com.example.wanandroid.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanandroid.R;
-import com.example.wanandroid.activity.WebViewActivity;
 import com.example.wanandroid.adapter.TabViewPagerAdapter;
 import com.example.wanandroid.databinding.FragmentPublicBinding;
 import com.example.wanandroid.viewmodel.PublicViewModel;
-import com.google.android.material.tabs.TabLayout;
-import com.hjq.toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class PublicFragment extends Fragment {
     private FragmentPublicBinding binding;
@@ -49,7 +41,6 @@ public class PublicFragment extends Fragment {
         //获取获取api接口数据
         viewModel.getPublicTabTitleList();
         getDataCallback();
-//        intentId();
         return binding.getRoot();
     }
 
@@ -58,7 +49,8 @@ public class PublicFragment extends Fragment {
      */
     private void getDataCallback(){
         viewModel.mPublicTabList.observe(getViewLifecycleOwner(),it->{
-            for(int i =1 ; i< it.size();i++){
+            //i从0开始，否则会漏数据
+            for(int i =0 ; i< it.size();i++){
                 title_list.add(it.get(i).getName());
                 id_list.add(it.get(i).getId());
             }

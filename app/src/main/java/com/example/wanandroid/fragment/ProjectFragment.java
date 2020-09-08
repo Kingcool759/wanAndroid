@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class ProjectFragment extends Fragment {
     private TabViewPagerAdapter tabAdapter;
     private ArrayList<Fragment> list_fragment = new ArrayList<>(); //定义要装frament的列表
     private List<String> title_list = new ArrayList<>();  //定义title列表
+    //recyclerview
+    private List<Integer> id_list = new ArrayList<>();  //根据id查找项目列表
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,9 +55,12 @@ public class ProjectFragment extends Fragment {
      */
     private void getDataCallback(){
         viewModel.mProjectTabList.observe(getViewLifecycleOwner(),it->{
-            for(int i =1 ; i< it.size();i++){
+            for(int i =0 ; i< it.size();i++){
                 title_list.add(it.get(i).getName());
+                id_list.add(it.get(i).getId());
             }
+            Log.d("getDataCallback: ",title_list+"");
+            Log.d("getDataCallback: ",id_list+"");
             setTabAndViewPager();
         });
     }
@@ -64,7 +70,7 @@ public class ProjectFragment extends Fragment {
      */
     private void setTabAndViewPager(){
         for(int i =0 ; i < title_list.size(); i++){
-            list_fragment.add(new ProjectViewPagerFragment());
+            list_fragment.add(ProjectViewPagerFragment.newInstance(id_list.get(i).toString()));
             binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
         }
         //绑定适配器

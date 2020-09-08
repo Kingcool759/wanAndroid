@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.wanandroid.viewmodel.ProjectViewPagerViewModel" />
+
+        <variable
+            name="item"
+            type="com.example.wanandroid.databean.ProjectDataListRes.DataBean.DatasBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_Guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_Guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+
+        <TextView
+            android:id="@+id/project_auther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@{item.author}"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/left_Guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="LvKang-insist" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.niceDate}"
+            android:textSize="13sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/project_auther"
+            app:layout_constraintEnd_toEndOf="@id/right_Guideline"
+            tools:text="2020-09-04 00:00" />
+
+        <ImageView
+            exImageUrl="@{item.envelopePic}"
+            android:id="@+id/project_image"
+            android:layout_width="70dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:src="@{item.envelopePic}"
+            app:layout_constraintStart_toStartOf="@id/left_Guideline"
+            app:layout_constraintTop_toBottomOf="@id/project_auther"
+            tools:src="@mipmap/default_project_img" />
+
+        <TextView
+            android:id="@+id/project_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@{item.title}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintLeft_toRightOf="@+id/project_image"
+            app:layout_constraintTop_toTopOf="@id/project_image"
+            app:layout_constraintBottom_toTopOf="@id/project_title_desc"
+            tools:text="基于 Kotlin + MVP 的 Wandroid" />
+
+        <TextView
+            android:id="@+id/project_title_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@{item.title}"
+            android:textSize="13sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/project_image"
+            app:layout_constraintTop_toBottomOf="@id/project_title"
+            app:layout_constraintBottom_toBottomOf="@id/project_image"
+            tools:text="基于鸿洋大佬的API，项目基于 Kotlin + MVP" />
+
+        <TextView
+            android:id="@+id/type1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{item.superChapterName}"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/left_Guideline"
+            app:layout_constraintTop_toBottomOf="@id/project_image"
+            tools:text="开源项目主Tab" />
+
+        <TextView
+            android:id="@+id/type2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="13sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/type1"
+            app:layout_constraintStart_toEndOf="@+id/type1"
+            tools:text="/" />
+
+        <TextView
+            android:id="@+id/type3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.chapterName}"
+            android:textSize="13sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/type1"
+            app:layout_constraintStart_toEndOf="@id/type2"
+            tools:text="完整项目" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/heart"
+            app:layout_constraintEnd_toStartOf="@id/right_Guideline"
+            app:layout_constraintTop_toBottomOf="@id/project_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

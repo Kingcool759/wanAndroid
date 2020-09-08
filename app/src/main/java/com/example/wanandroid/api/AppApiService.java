@@ -3,6 +3,7 @@ package com.example.wanandroid.api;
 import com.example.wanandroid.databean.AnswerListRes;
 import com.example.wanandroid.databean.BannerListRes;
 import com.example.wanandroid.databean.HomeListRes;
+import com.example.wanandroid.databean.ProjectDataListRes;
 import com.example.wanandroid.databean.ProjectTabListRes;
 import com.example.wanandroid.databean.PublicDataListRes;
 import com.example.wanandroid.databean.PublicTabListRes;
@@ -56,4 +57,10 @@ public interface AppApiService {
      */
     @GET(AppApi.PROJECT_TAB_LIST)
     Call<ProjectTabListRes> getProjectTabList();
+
+    /**
+     * 获取项目数据列表
+     */
+    @GET(AppApi.PROJECT_DATA_LIST)
+    Call<ProjectDataListRes> getProjectDataList(@Query("cid") String chapterId);
 }

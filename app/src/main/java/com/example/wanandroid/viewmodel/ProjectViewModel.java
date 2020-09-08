@@ -16,10 +16,11 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class ProjectViewModel extends ViewModel {
+    //tabs
     public MutableLiveData<List<ProjectTabListRes.DataBean>> mProjectTabList = new MutableLiveData<>();
 
     /**
-     * 获取公众号tab
+     * 获取项目tab
      */
     public void getProjectTabTitleList() {
         NetworkPortal.getService(AppApiService.class).getProjectTabList().enqueue(new ApiCallback<ProjectTabListRes>() {

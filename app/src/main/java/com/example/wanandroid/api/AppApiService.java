@@ -3,6 +3,7 @@ package com.example.wanandroid.api;
 import com.example.wanandroid.databean.AnswerListRes;
 import com.example.wanandroid.databean.BannerListRes;
 import com.example.wanandroid.databean.HomeListRes;
+import com.example.wanandroid.databean.NavigationDataListRes;
 import com.example.wanandroid.databean.ProjectDataListRes;
 import com.example.wanandroid.databean.ProjectTabListRes;
 import com.example.wanandroid.databean.PublicDataListRes;
@@ -74,5 +75,6 @@ public interface AppApiService {
     /**
      * 获取体系-导航数据
      */
-    //。。。。
+    @GET(AppApi.NAVIGATION_DATA_LIST)
+    Call<NavigationDataListRes> getNavigationDataList();
 }

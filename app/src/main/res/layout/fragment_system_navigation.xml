@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.wanandroid.viewmodel.SystemNavigationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/navigation_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="navigation"
-            android:textSize="20sp"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

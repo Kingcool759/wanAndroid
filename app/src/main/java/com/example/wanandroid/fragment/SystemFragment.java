@@ -44,8 +44,10 @@ public class SystemFragment extends Fragment {
         title_list.add("体系");
         title_list.add("导航");
 
+        list_fragment.add(new SystemStructureFragment());
+        list_fragment.add(new SystemNavigationFragment());
+
         for(int i =0 ; i < title_list.size(); i++){
-            list_fragment.add(new SystemViewPagerFragment());
             binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
         }
         //绑定适配器

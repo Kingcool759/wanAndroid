@@ -44,4 +44,13 @@ public class AppApi {
      */
     public static final String PROJECT_DATA_LIST = "project/list/1/json";
 
+    /**
+     *  获取体系-体系数据
+     */
+    public static final String SYSETM_DATA_LIST = "tree/json";
+
+    /**
+     *  获取体系-导航数据
+     */
+    //。。。
 }

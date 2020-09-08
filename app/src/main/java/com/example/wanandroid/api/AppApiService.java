@@ -7,6 +7,7 @@ import com.example.wanandroid.databean.ProjectDataListRes;
 import com.example.wanandroid.databean.ProjectTabListRes;
 import com.example.wanandroid.databean.PublicDataListRes;
 import com.example.wanandroid.databean.PublicTabListRes;
+import com.example.wanandroid.databean.SystemDataListRes;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -63,4 +64,15 @@ public interface AppApiService {
      */
     @GET(AppApi.PROJECT_DATA_LIST)
     Call<ProjectDataListRes> getProjectDataList(@Query("cid") String chapterId);
+
+    /**
+     * 获取体系-体系数据
+     */
+    @GET(AppApi.SYSETM_DATA_LIST)
+    Call<SystemDataListRes> getSystemDataList();
+
+    /**
+     * 获取体系-导航数据
+     */
+    //。。。。
 }

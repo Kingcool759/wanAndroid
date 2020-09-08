@@ -9,29 +9,34 @@ import com.example.wanandroid.api.ApiCallback;
 import com.example.wanandroid.api.AppApiService;
 import com.example.wanandroid.api.NetworkPortal;
 import com.example.wanandroid.databean.AnswerListRes;
-import com.example.wanandroid.databean.HomeListRes;
+import com.example.wanandroid.databean.SystemDataListRes;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class AnswerViewModel extends ViewModel {
+/**
+ * @data on 2020/9/8 4:58 PM
+ * @auther
+ * @describe
+ */
+public class SystemViewPagerViewModel extends ViewModel {
 
-    public MutableLiveData<List<AnswerListRes.DataBean.DatasBean>> mAnswerList = new MutableLiveData<>();
+    public MutableLiveData<List<SystemDataListRes.DataBean>> mSystemDataList = new MutableLiveData<>();
 
     /**
-     * 获取首页列表
+     * 获取体系数据
      */
-    public void getAnswerPageList() {
-        NetworkPortal.getService(AppApiService.class).getAnswerList().enqueue(new ApiCallback<AnswerListRes>() {
+    public void getSystemPageList() {
+        NetworkPortal.getService(AppApiService.class).getSystemDataList().enqueue(new ApiCallback<SystemDataListRes>() {
             @Override
-            public void onSuccessful(Call<AnswerListRes> call, Response<AnswerListRes> response) {
+            public void onSuccessful(Call<SystemDataListRes> call, Response<SystemDataListRes> response) {
                 Log.d("onSuccessful", "请求成功了！");
                 if (response == null || response.body() == null) {
                     return;
                 }
-                mAnswerList.setValue(response.body().getData().getDatas());
+                mSystemDataList.setValue(response.body().getData());
             }
 
             @Override
@@ -40,4 +45,5 @@ public class AnswerViewModel extends ViewModel {
             }
         });
     }
+
 }

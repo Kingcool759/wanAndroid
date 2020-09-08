@@ -60,30 +60,32 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
-    //gson
+    //Gson
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    //glide
+    //Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
-    //smartRefreshLayout
+    //SmartRefreshLayout
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:25.3.1'
 
-    //matrial design
+    //Matrial Design
     implementation "com.google.android.material:material:1.1.0-alpha07"
     implementation "androidx.core:core-ktx:+"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    //itembinding---recyclerview不用写适配器
+    //Itembinding---recyclerview不用写适配器
     implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.2.0'
     implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.2.0'
 
-    //方法总数超过
+    //方法总数+类数>65536解决办法
     implementation 'com.android.support:multidex:1.0.3'
 
+    //FlowLayout
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
 
 }
 repositories {

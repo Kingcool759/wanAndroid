@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @data on 2020/9/2 11:55 AM
  * @auther
- * @describe
+ * @describe  /recyclerview实现首页banner效果
  */
 public class BannerRecyclerViewAdapter extends RecyclerView.Adapter<BannerRecyclerViewAdapter.MyViewHolder> {
     private Context context;

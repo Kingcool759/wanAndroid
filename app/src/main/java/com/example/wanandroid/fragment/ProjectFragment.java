@@ -15,11 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wanandroid.R;
-import com.example.wanandroid.adapter.TabViewPagerAdapter;
+import com.example.wanandroid.adapter.TablayoutViewPagerAdapter;
 import com.example.wanandroid.databinding.FragmentProjectBinding;
-import com.example.wanandroid.databinding.FragmentPublicBinding;
 import com.example.wanandroid.viewmodel.ProjectViewModel;
-import com.example.wanandroid.viewmodel.PublicViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,7 @@ public class ProjectFragment extends Fragment {
     private ProjectViewModel viewModel;
 
     //tablayout
-    private TabViewPagerAdapter tabAdapter;
+    private TablayoutViewPagerAdapter tabAdapter;
     private ArrayList<Fragment> list_fragment = new ArrayList<>(); //定义要装frament的列表
     private List<String> title_list = new ArrayList<>();  //定义title列表
     //recyclerview
@@ -74,7 +72,7 @@ public class ProjectFragment extends Fragment {
             binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
         }
         //绑定适配器
-        tabAdapter = new TabViewPagerAdapter(getChildFragmentManager(),list_fragment,title_list);
+        tabAdapter = new TablayoutViewPagerAdapter(getChildFragmentManager(),list_fragment,title_list);
         //viewpager加载adapter
         binding.viewPager.setAdapter(tabAdapter);
         //TabLayout加载viewpager

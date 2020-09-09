@@ -24,6 +24,8 @@ import com.example.wanandroid.viewmodel.PublicViewPagerViewModel;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
+//使用了itemBinding取代了recyclerview的adapter
+
 public class PublicViewPagerFragment extends Fragment {
     private FragmentPublicViewpagerBinding binding;
     private PublicViewPagerViewModel viewModel;
@@ -75,7 +77,6 @@ public class PublicViewPagerFragment extends Fragment {
         viewModel.getPublicTitleDataList();
 
         //给recyclerview添加下划线
-
         binding.recyclerview.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext())));
         return binding.getRoot();
     }

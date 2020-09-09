@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
-import com.example.wanandroid.R;
 
 /**
  * @data on 2020/9/8 10:53 AM

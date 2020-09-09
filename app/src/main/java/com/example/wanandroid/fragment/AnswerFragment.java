@@ -18,12 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.wanandroid.R;
 import com.example.wanandroid.activity.WebViewActivity;
 import com.example.wanandroid.adapter.AnswerListAdapter;
 import com.example.wanandroid.adapter.DividerItemDecoration;
 import com.example.wanandroid.adapter.DividerNormalDecoration;
 import com.example.wanandroid.adapter.HomeListAdapter;
+import com.example.wanandroid.arouter.ARouterManager;
 import com.example.wanandroid.databean.AnswerListRes;
 import com.example.wanandroid.databean.HomeListRes;
 import com.example.wanandroid.databinding.FragmentAnswerBinding;
@@ -83,11 +85,16 @@ public class AnswerFragment extends Fragment {
                 @Override
                 public void getBannerData(String title, String link) {
                     //fragment向activity跳转，并且携带link数据过去
-                    Intent intent = new Intent();
-                    intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
-                    intent.putExtra("bannertitle",title);
-                    intent.putExtra("bannerLinkUrl",link);
-                    startActivity(intent);
+//                    Intent intent = new Intent();
+//                    intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
+//                    intent.putExtra("bannertitle",title);
+//                    intent.putExtra("bannerLinkUrl",link);
+//                    startActivity(intent);
+                    //使用ARouter路由跳转
+                    ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
+                            .withString("title",title)
+                            .withString("link",link)
+                            .navigation();
                     answerAdapter.notifyDataSetChanged();
                 }
             });

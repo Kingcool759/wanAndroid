@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.wanandroid.R;
-import com.example.wanandroid.adapter.TabViewPagerAdapter;
+import com.example.wanandroid.adapter.TablayoutViewPagerAdapter;
 import com.example.wanandroid.databinding.FragmentSystemBinding;
 import com.example.wanandroid.viewmodel.SystemViewModel;
 
@@ -23,7 +23,7 @@ public class SystemFragment extends Fragment {
     private SystemViewModel viewModel;
 
     //tablayout
-    private TabViewPagerAdapter tabAdapter;
+    private TablayoutViewPagerAdapter tabAdapter;
     private ArrayList<Fragment> list_fragment = new ArrayList<>();
     private ArrayList<String> title_list = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class SystemFragment extends Fragment {
             binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
         }
         //绑定适配器
-        tabAdapter = new TabViewPagerAdapter(getChildFragmentManager(),list_fragment,title_list);
+        tabAdapter = new TablayoutViewPagerAdapter(getChildFragmentManager(),list_fragment,title_list);
         //viewpager加载adapter
         binding.viewPager.setAdapter(tabAdapter);
         //TabLayout加载viewpager

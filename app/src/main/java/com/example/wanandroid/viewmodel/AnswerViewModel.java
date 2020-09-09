@@ -21,7 +21,7 @@ public class AnswerViewModel extends ViewModel {
     public MutableLiveData<List<AnswerListRes.DataBean.DatasBean>> mAnswerList = new MutableLiveData<>();
 
     /**
-     * 获取首页列表
+     * 获取问答列表
      */
     public void getAnswerPageList() {
         NetworkPortal.getService(AppApiService.class).getAnswerList().enqueue(new ApiCallback<AnswerListRes>() {

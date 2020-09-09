@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @data on 2020/9/8 4:23 PM
  * @auther
- * @describe
+ * @describe  体系-体系
  */
 public class SystemListAdapter extends RecyclerView.Adapter<SystemListAdapter.MyViewHolder> {
     private List<SystemDataListRes.DataBean> dataBeanList;

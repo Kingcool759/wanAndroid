@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @data on 2020/9/3 3:36 PM
  * @auther
- * @describe
+ * @describe  问答
  */
 public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.MyViewHolder> {
     private List<AnswerListRes.DataBean.DatasBean> datalist;

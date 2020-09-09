@@ -12,27 +12,50 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.wanandroid.R;
+import com.example.wanandroid.arouter.ARouterManager;
 import com.example.wanandroid.databinding.ActivityWebViewBinding;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.toast.ToastUtils;
 
+@Route(path = "/wanandroid/webviewActivity")
 public class WebViewActivity extends AppCompatActivity {
     private ActivityWebViewBinding binding;
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @Autowired(name = "title")   //获取ARouter传过来值需要使用的注解
+    String bannerTitle;
+
+    @Autowired(name = "link")
+    String bannerLinkUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_web_view);
+        ARouter.getInstance().inject(this);  //接收参数注解
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_web_view);
 
-        Intent intent = getIntent();
-        //接收数据-from：Fragment
-        String bannerTitle = intent.getStringExtra("bannertitle");
-        String bannerLinkUrl = intent.getStringExtra("bannerLinkUrl");
-        //设置webViewTitle
+        //采用Intent方式,接收首页和问答的数据
+//        Intent intent = getIntent();
+//        //接收数据-from：Fragment
+//        bannerTitle = intent.getStringExtra("bannertitle");
+//        bannerLinkUrl = intent.getStringExtra("bannerLinkUrl");
+
+        //采用ARouter方式，接收公众号，体系，项目的数据
+        //路由初始化
+
+        /**
+         *  设置webView
+         */
+        getWebView();
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void getWebView() {
+        //设置WebViewTitle标题
         binding.webViewTitleBar.setTitle(bannerTitle);
-
         binding.webViewTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
             @Override
             public void onLeftClick(View v) {
@@ -52,7 +75,7 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
-        //设置WebView
+        //设置WebView加载内容
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.setWebChromeClient(new WebChromeClient());
 //        webView.setWebViewClient(new WebViewClient());

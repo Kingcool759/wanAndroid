@@ -12,13 +12,13 @@ import java.util.List;
 /**
  * @data on 2020/9/7 10:23 AM
  * @auther
- * @describe
+ * @describe  tablayout
  */
-public class TabViewPagerAdapter extends FragmentPagerAdapter {
+public class TablayoutViewPagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> list_fragment; // fragment列表
     private List<String> list_Title; // tab名的列表
 
-    public TabViewPagerAdapter(FragmentManager fm, List<Fragment> list_fragment, List<String> list_Title){
+    public TablayoutViewPagerAdapter(FragmentManager fm, List<Fragment> list_fragment, List<String> list_Title){
         super(fm);
         this.list_fragment = list_fragment;
         this.list_Title = list_Title;

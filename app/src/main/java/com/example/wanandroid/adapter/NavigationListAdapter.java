@@ -18,6 +18,12 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.List;
 
+/**
+ * @data on 2020/9/8 4:23 PM
+ * @auther
+ * @describe  体系-导航
+ */
+
 public class NavigationListAdapter extends RecyclerView.Adapter<NavigationListAdapter.MyViewHolder> {
 
     private List<NavigationDataListRes.DataBean> dataBeanList;

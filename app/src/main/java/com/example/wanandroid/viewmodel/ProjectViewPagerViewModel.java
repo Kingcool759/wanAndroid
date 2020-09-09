@@ -6,11 +6,13 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 import androidx.lifecycle.ViewModel;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.wanandroid.BR;
 import com.example.wanandroid.R;
 import com.example.wanandroid.api.ApiCallback;
 import com.example.wanandroid.api.AppApiService;
 import com.example.wanandroid.api.NetworkPortal;
+import com.example.wanandroid.arouter.ARouterManager;
 import com.example.wanandroid.databean.ProjectDataListRes;
 import com.example.wanandroid.databean.PublicDataListRes;
 
@@ -59,5 +61,15 @@ public class ProjectViewPagerViewModel extends ViewModel {
                 Log.d("onFail", "啊哦～请求失败了！");
             }
         });
+    }
+    /**
+     *  进入项目列表详情
+     *
+     */
+    public void onItemClick(ProjectDataListRes.DataBean.DatasBean item){
+        ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
+                .withString("title",item.getTitle())
+                .withString("link",item.getLink())
+                .navigation();
     }
 }

@@ -58,6 +58,7 @@ public class SystemListAdapter extends RecyclerView.Adapter<SystemListAdapter.My
                 return tv;
             }
         });
+        //TagFlowLayout流式布局每个控件的点击事件处理
         holder.itemFlowlayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {

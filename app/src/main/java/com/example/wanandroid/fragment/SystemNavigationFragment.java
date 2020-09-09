@@ -66,7 +66,7 @@ public class SystemNavigationFragment extends Fragment {
     private void getDataCallback(){
         viewModel.mNavigationDataList.observe(getViewLifecycleOwner(),it->{
             itemTitles.addAll(it);
-            Log.i("armstrong",itemTitles+"");
+            Log.i("armstrong",itemTitles.size()+"");
             rvAdapter.notifyDataSetChanged();
         });
     }

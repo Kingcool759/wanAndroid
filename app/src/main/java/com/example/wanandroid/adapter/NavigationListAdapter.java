@@ -40,7 +40,7 @@ public class NavigationListAdapter extends RecyclerView.Adapter<NavigationListAd
     public void onBindViewHolder(@NonNull NavigationListAdapter.MyViewHolder holder, int position) {
         NavigationDataListRes.DataBean dataBean = dataBeanList.get(position);
 
-        holder.itemTitle.setText(dataBean.getArticles().get(position).getChapterName());
+        holder.itemTitle.setText(dataBean.getName());  //使用dataBean.getArticles.get(position).getchapterName() 会产生数组越界，因为name和chapterName值相同，但json结构不同。
         holder.itemFlowlayout.setAdapter(new TagAdapter<NavigationDataListRes.DataBean.ArticlesBean>(dataBean.getArticles()) {
             @Override
             public View getView(FlowLayout parent, int position, NavigationDataListRes.DataBean.ArticlesBean s) {
@@ -52,6 +52,7 @@ public class NavigationListAdapter extends RecyclerView.Adapter<NavigationListAd
                 return tv;
             }
         });
+        //TagFlowLayout流式布局每个控件的点击事件处理
         holder.itemFlowlayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {

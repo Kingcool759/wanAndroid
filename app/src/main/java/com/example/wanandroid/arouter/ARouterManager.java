@@ -10,4 +10,10 @@ public class ARouterManager {
      *  列表详情
      */
     public static final String WEBVIEW_DETAILS = "/wanandroid/webviewActivity";
+
+    /**
+     *  搜索
+     */
+    public static final String SEARCH_ACTIVITY = "/wanandroid/searchActivity";
+
 }

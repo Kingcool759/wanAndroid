@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.wanandroid.R;
 import com.example.wanandroid.adapter.BottomBarAdapter;
+import com.example.wanandroid.arouter.ARouterManager;
 import com.example.wanandroid.databinding.ActivityMainBinding;
 import com.example.wanandroid.fragment.AnswerFragment;
 import com.example.wanandroid.fragment.HomeFragment;
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             public void onRightClick(View v) {
                 //搜索键
                 ToastUtils.show("右项View被点击");
+                ARouter.getInstance().build(ARouterManager.SEARCH_ACTIVITY).navigation();
             }
         });
     }

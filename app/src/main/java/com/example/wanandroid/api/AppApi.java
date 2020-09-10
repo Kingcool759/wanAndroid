@@ -53,4 +53,10 @@ public class AppApi {
      *  获取体系-导航数据
      */
     public static final String NAVIGATION_DATA_LIST = "navi/json";
+
+    /**
+     *  搜索文章
+     */
+    public static final String SEARCH_ARTICLE = "article/query/{page}/json";
+
 }

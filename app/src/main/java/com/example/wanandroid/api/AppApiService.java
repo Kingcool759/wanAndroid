@@ -8,11 +8,13 @@ import com.example.wanandroid.databean.ProjectDataListRes;
 import com.example.wanandroid.databean.ProjectTabListRes;
 import com.example.wanandroid.databean.PublicDataListRes;
 import com.example.wanandroid.databean.PublicTabListRes;
+import com.example.wanandroid.databean.SearchArticleListRes;
 import com.example.wanandroid.databean.SystemDataListRes;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -77,4 +79,11 @@ public interface AppApiService {
      */
     @GET(AppApi.NAVIGATION_DATA_LIST)
     Call<NavigationDataListRes> getNavigationDataList();
+
+    /**
+     * 搜索文章
+     */
+    @POST(AppApi.SEARCH_ARTICLE)
+    Call<SearchArticleListRes> getSearchArticlesList(@Path("page") int PageNo,@Query("k") String key);
+
 }

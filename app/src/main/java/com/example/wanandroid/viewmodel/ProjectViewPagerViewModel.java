@@ -40,7 +40,7 @@ public class ProjectViewPagerViewModel extends ViewModel {
             .bindExtra(BR.viewModel, this);
 
     /**
-     * 获取项目数据列表
+     * 获取项目数据列表（根据tab传来的id值）
      */
     public void getProjectTitleDataList() {
         NetworkPortal.getService(AppApiService.class).getProjectDataList(mId).enqueue(new ApiCallback<ProjectDataListRes>() {
@@ -64,7 +64,7 @@ public class ProjectViewPagerViewModel extends ViewModel {
         });
     }
     /**
-     *  进入项目列表详情
+     *  进入项目列表详情（跳转传值）
      *
      */
     public void onItemClick(ProjectDataListRes.DataBean.DatasBean item){

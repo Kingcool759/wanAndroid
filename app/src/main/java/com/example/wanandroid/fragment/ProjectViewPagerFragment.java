@@ -76,7 +76,6 @@ public class ProjectViewPagerFragment extends Fragment {
         viewModel.getProjectTitleDataList();
         //为recyclerView设置下划线
         binding.projectRecyclerview.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext())));
-
         return binding.getRoot();
     }
 }

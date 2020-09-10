@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
+        tools:text="标题标题标题标题标题标题标题标题标题标题标题标题标题标题"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@id/right_Guideline"
@@ -70,24 +70,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_answer_label" />
 
     <TextView
-        android:id="@+id/tv_answer_link_title"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_answer_title_des"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="链接："
-        android:textColor="@color/blue"
+        tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
         android:textSize="13sp"
+        android:maxLines="3"
+        android:minLines="2"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="@id/right_Guideline"
         app:layout_constraintStart_toEndOf="@+id/left_Guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_answer_title" />
-
-    <TextView
-        android:id="@+id/tv_answer_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="https://wanandroid.com/wenda/show/14990"
-        android:textSize="13sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/tv_answer_link_title"
-        app:layout_constraintStart_toEndOf="@id/tv_answer_link_title" />
 
     <TextView
         android:id="@+id/tv_answer_super_chapterName"
@@ -97,7 +91,7 @@
         android:text="问答"
         android:textSize="13sp"
         app:layout_constraintLeft_toLeftOf="@id/left_Guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_answer_link_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_answer_title_des" />
 
     <TextView
         android:id="@+id/tv_view"
@@ -112,7 +106,7 @@
         android:id="@+id/tv_answer_chapterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="官方"
+        tools:text="官方"
         android:textSize="13sp"
         app:layout_constraintBaseline_toBaselineOf="@id/tv_answer_super_chapterName"
         app:layout_constraintLeft_toRightOf="@id/tv_view" />
@@ -125,5 +119,5 @@
         android:src="@mipmap/heart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/right_Guideline"
-        app:layout_constraintTop_toBottomOf="@id/tv_answer_link_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_answer_title_des" />
 </androidx.constraintlayout.widget.ConstraintLayout>

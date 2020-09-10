@@ -1,6 +1,7 @@
 package com.example.wanandroid.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class PublicFragment extends Fragment {
     //tablayout
     private TablayoutViewPagerAdapter tabAdapter;
     private ArrayList<Fragment> list_fragment = new ArrayList<>(); //定义要装frament的列表
-    private List<String> title_list = new ArrayList<>();  //定义title列表
+    private List<String> tab_list = new ArrayList<>();  //定义tab列表
     //recyclerview
     private List<Integer> id_list = new ArrayList<>();  //根据id查找公众号列表
     private int id;
@@ -51,7 +52,7 @@ public class PublicFragment extends Fragment {
         viewModel.mPublicTabList.observe(getViewLifecycleOwner(),it->{
             //i从0开始，否则会漏数据
             for(int i =0 ; i< it.size();i++){
-                title_list.add(it.get(i).getName());
+                tab_list.add(it.get(i).getName());
                 id_list.add(it.get(i).getId());
             }
             setTabAndViewPager();
@@ -62,12 +63,12 @@ public class PublicFragment extends Fragment {
      *  使用titlelist,设置tabs
      */
     private void setTabAndViewPager() {
-        for (int i = 0; i < title_list.size(); i++) {
+        for (int i = 0; i < tab_list.size(); i++) {
             list_fragment.add(PublicViewPagerFragment.newInstance(id_list.get(i).toString()));
-            binding.tablayout.addTab(binding.tablayout.newTab().setText(title_list.get(i)));
+            binding.tablayout.addTab(binding.tablayout.newTab().setText(tab_list.get(i)));
         }
         //绑定适配器
-        tabAdapter = new TablayoutViewPagerAdapter(getChildFragmentManager(), list_fragment, title_list);
+        tabAdapter = new TablayoutViewPagerAdapter(getChildFragmentManager(), list_fragment, tab_list);
         //viewpager加载adapter
         binding.viewPager.setAdapter(tabAdapter);
         //TabLayout加载viewpager

@@ -17,8 +17,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->viewModel.onItemClick(item)}"
         android:background="@color/white"
+        android:onClick="@{()->viewModel.onItemClick(item)}"
         tools:ignore="MissingConstraints">
 
         <androidx.constraintlayout.widget.Guideline
@@ -57,8 +57,8 @@
             tools:text="2020-09-04 00:00" />
 
         <ImageView
-            exImageUrl="@{item.envelopePic}"
             android:id="@+id/project_image"
+            exImageUrl="@{item.envelopePic}"
             android:layout_width="70dp"
             android:layout_height="120dp"
             android:layout_marginLeft="10dp"
@@ -70,29 +70,36 @@
 
         <TextView
             android:id="@+id/project_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="@{item.title}"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintVertical_chainStyle="packed"
+            android:minLines="1"
+            android:maxLines="2"
+            app:layout_constraintBottom_toTopOf="@id/project_title_desc"
             app:layout_constraintLeft_toRightOf="@+id/project_image"
             app:layout_constraintTop_toTopOf="@id/project_image"
-            app:layout_constraintBottom_toTopOf="@id/project_title_desc"
-            tools:text="基于 Kotlin + MVP 的 Wandroid" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="基于 Kotlin+MVP 的Wandroid" />
 
         <TextView
             android:id="@+id/project_title_desc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:text="@{item.title}"
-            android:textSize="13sp"
             android:layout_marginTop="8dp"
-            app:layout_constraintLeft_toRightOf="@+id/project_image"
-            app:layout_constraintTop_toBottomOf="@id/project_title"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:minLines="1"
+            android:text="@{item.desc}"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@id/project_image"
+            app:layout_constraintEnd_toEndOf="@id/right_Guideline"
+            app:layout_constraintStart_toEndOf="@+id/project_image"
+            app:layout_constraintTop_toBottomOf="@id/project_title"
             tools:text="基于鸿洋大佬的API，项目基于 Kotlin + MVP" />
 
         <TextView

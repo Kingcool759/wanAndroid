@@ -57,8 +57,6 @@ public class ProjectFragment extends Fragment {
                 title_list.add(it.get(i).getName());
                 id_list.add(it.get(i).getId());
             }
-            Log.d("getDataCallback: ",title_list+"");
-            Log.d("getDataCallback: ",id_list+"");
             setTabAndViewPager();
         });
     }

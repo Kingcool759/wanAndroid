@@ -1,5 +1,6 @@
 package com.example.wanandroid.viewmodel;
 
+import android.text.Html;
 import android.util.Log;
 
 import androidx.databinding.ObservableArrayList;
@@ -68,7 +69,7 @@ public class ProjectViewPagerViewModel extends ViewModel {
      */
     public void onItemClick(ProjectDataListRes.DataBean.DatasBean item){
         ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
-                .withString("title",item.getTitle())
+                .withString("title", String.valueOf(Html.fromHtml(item.getTitle())))
                 .withString("link",item.getLink())
                 .navigation();
     }

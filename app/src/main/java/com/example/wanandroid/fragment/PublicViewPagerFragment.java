@@ -49,7 +49,6 @@ public class PublicViewPagerFragment extends Fragment {
         if (arguments!=null){
         id = arguments.getString("id");
         }
-        Log.d("id ----> ", id);
         //使用此方法将id传给其viewmodel用于按参数id调用api接口获取数据。——————————viewmodel Factory
         viewModel = ViewModelProviders.of(this, new ViewModelProvider.Factory() {
 

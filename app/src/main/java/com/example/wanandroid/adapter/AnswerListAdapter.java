@@ -1,5 +1,6 @@
 package com.example.wanandroid.adapter;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,9 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         AnswerListRes.DataBean.DatasBean dataBean = datalist.get(position);
-        holder.title.setText(dataBean.getTitle());
+        holder.title.setText(Html.fromHtml(dataBean.getTitle()));
         holder.author.setText(dataBean.getAuthor());
-        holder.link.setText(dataBean.getLink());
+        holder.desc.setText(Html.fromHtml(dataBean.getDesc()));
 
         //时间戳转成String类型
         DateUtil dateUtil = new DateUtil();
@@ -73,7 +74,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
         //标题
         private TextView title;
         //链接
-        private TextView link;
+        private TextView desc;
         //类型
         private TextView tvSuperChapterName;
         //具体
@@ -84,7 +85,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
             author = itemView.findViewById(R.id.tv_answer_author);
             tvDate = itemView.findViewById(R.id.tv_answer_share_date);
             title = itemView.findViewById(R.id.tv_answer_title);
-            link = itemView.findViewById(R.id.tv_answer_link);
+            desc = itemView.findViewById(R.id.tv_answer_title_des);
             tvSuperChapterName = itemView.findViewById(R.id.tv_answer_super_chapterName);
             tvChapterName = itemView.findViewById(R.id.tv_answer_chapterName);
         }

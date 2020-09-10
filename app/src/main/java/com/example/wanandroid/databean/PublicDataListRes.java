@@ -1,5 +1,8 @@
 package com.example.wanandroid.databean;
 
+import android.text.Html;
+import android.text.Spanned;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -377,8 +380,8 @@ public class PublicDataListRes extends BaseResponse {
                 this.superChapterName = superChapterName;
             }
 
-            public String getTitle() {
-                return title;
+            public Spanned getTitle() {
+                return Html.fromHtml(title);
             }
 
             public void setTitle(String title) {

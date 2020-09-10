@@ -1,6 +1,7 @@
 package com.example.wanandroid.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         HomeListRes.DataBean.DatasBean dataBean = datalist.get(position);
-        holder.title.setText(dataBean.getTitle());
+        holder.title.setText(Html.fromHtml(dataBean.getTitle()));
         holder.tvShareUser.setText(dataBean.getShareUser());
 
         //时间戳转成String类型

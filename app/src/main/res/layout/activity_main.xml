@@ -67,25 +67,25 @@
                     <RadioButton
                         android:id="@+id/radioBtn_answer"
                         style="@style/bottombar_radioButton_style"
-                        android:drawableTop="@drawable/bottombar_home_selector"
+                        android:drawableTop="@drawable/bottombar_answer_selector"
                         android:text="问答" />
 
                     <RadioButton
                         android:id="@+id/radioBtn_public"
                         style="@style/bottombar_radioButton_style"
-                        android:drawableTop="@drawable/bottombar_home_selector"
+                        android:drawableTop="@drawable/bottombar_public_selector"
                         android:text="公众号" />
 
                     <RadioButton
                         android:id="@+id/radioBtn_system"
                         style="@style/bottombar_radioButton_style"
-                        android:drawableTop="@drawable/bottombar_home_selector"
+                        android:drawableTop="@drawable/bottombar_system_selector"
                         android:text="体系" />
 
                     <RadioButton
                         android:id="@+id/radioBtn_project"
                         style="@style/bottombar_radioButton_style"
-                        android:drawableTop="@drawable/bottombar_home_selector"
+                        android:drawableTop="@drawable/bottombar_project_selector"
                         android:text="项目" />
                 </RadioGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>

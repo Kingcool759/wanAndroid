@@ -22,7 +22,7 @@
             app:leftIcon="@mipmap/goback"
             app:lineVisible="false"
             app:rightColor="@color/white"
-            app:rightIcon="@mipmap/heart"
+            app:rightIcon="@drawable/heart_selector"
             app:title="首页"
             app:titleColor="@color/white"
             app:titleSize="20dp"

@@ -94,6 +94,7 @@
         app:layout_constraintLeft_toRightOf="@id/tv_view" />
 
     <ImageView
+        android:id="@+id/iv_red_heart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

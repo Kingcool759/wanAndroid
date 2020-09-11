@@ -80,16 +80,10 @@ public class AnswerFragment extends Fragment {
     private void getDateCallback(){
         viewModel.mAnswerList.observe(getViewLifecycleOwner(),it->{
             mAnswerList.addAll(it);
-            //获取点击事件数据
+            //回调事件获取点击事件数据
             answerAdapter.setBannerDataListener(new AnswerListAdapter.BannerDataListener() {
                 @Override
                 public void getBannerData(String title, String link) {
-                    //fragment向activity跳转，并且携带link数据过去
-//                    Intent intent = new Intent();
-//                    intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
-//                    intent.putExtra("bannertitle",title);
-//                    intent.putExtra("bannerLinkUrl",link);
-//                    startActivity(intent);
                     //使用ARouter路由跳转
                     ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
                             .withString("title",title)

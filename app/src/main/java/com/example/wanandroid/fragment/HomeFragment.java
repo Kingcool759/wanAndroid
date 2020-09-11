@@ -116,12 +116,11 @@ public class HomeFragment extends Fragment {
         });
         //获取点击事件数据
         bannerAdapter.setBannerDataListener((title, link) -> {
-            //fragment向activity跳转，并且携带link数据过去
-            Intent intent = new Intent();
-            intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
-            intent.putExtra("bannertitle", title);
-            intent.putExtra("bannerLinkUrl", link);
-            startActivity(intent);
+            //使用ARouter路由跳转
+            ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
+                    .withString("title",title)
+                    .withString("link",link)
+                    .navigation();
         });
 
         //首页-列表
@@ -133,12 +132,6 @@ public class HomeFragment extends Fragment {
         homeAdapter.setBannerDataListener(new HomeListAdapter.BannerDataListener() {
             @Override
             public void getBannerData(String title, String link) {
-                //fragment向activity跳转，并且携带link数据过去
-//                Intent intent = new Intent();
-//                intent.setClass(Objects.requireNonNull(getContext()), WebViewActivity.class);
-//                intent.putExtra("bannertitle", title);
-//                intent.putExtra("bannerLinkUrl", link);
-//                startActivity(intent);
                 //使用ARouter路由跳转
                 ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
                         .withString("title",title)
@@ -152,19 +145,6 @@ public class HomeFragment extends Fragment {
      * 智能刷新
      */
     private void getRefresh() {
-//        binding.srlSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(RefreshLayout refreshlayout) {
-//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
-//            }
-//        });
-//        binding.srlSmartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//            @Override
-//            public void onLoadMore(RefreshLayout refreshlayout) {
-//                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
-//            }
-//        });
+
     }
-
-
 }

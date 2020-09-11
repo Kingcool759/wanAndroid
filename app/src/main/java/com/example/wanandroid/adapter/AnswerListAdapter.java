@@ -7,12 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.databean.AnswerListRes;
-import com.example.wanandroid.databean.HomeListRes;
 import com.example.wanandroid.utils.DateUtil;
 
 import java.util.List;
@@ -34,7 +32,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_answer_list_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_answer_list,parent,false);
         final AnswerListAdapter.MyViewHolder holder = new AnswerListAdapter.MyViewHolder(itemView);
         return holder;
     }

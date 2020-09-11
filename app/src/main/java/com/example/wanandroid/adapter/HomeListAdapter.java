@@ -1,22 +1,19 @@
 package com.example.wanandroid.adapter;
 
-import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wanandroid.R;
 import com.example.wanandroid.databean.HomeListRes;
 import com.example.wanandroid.utils.DateUtil;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +33,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_home_list_item,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_list,parent,false);
         final HomeListAdapter.MyViewHolder holder = new HomeListAdapter.MyViewHolder(itemView);
         return holder;
     }
@@ -54,6 +51,11 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
 //        holder.tvTime.setText(dataBean.getNiceShareDate());  //几天前
         holder.tvSuperChapterName.setText(dataBean.getSuperChapterName());
         holder.tvChapterName.setText(dataBean.getChapterName());
+//        //点击事件处理-关注
+//        holder.ivRedHeart.setOnClickListener((View)->{
+//
+//            holder.ivRedHeart.setImageResource(R.drawable.heart_gray_selector);
+//        });
         //点击事件处理
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +63,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
                 mBannerDataListener.getBannerData(datalist.get(position).getTitle(), datalist.get(position).getLink());
             }
         });
+
     }
 
     @Override
@@ -82,6 +85,9 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
         //具体
         private TextView tvChapterName;
 
+        //关注
+        private ImageView ivRedHeart;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvShareUser = itemView.findViewById(R.id.tv_share_user);
@@ -90,6 +96,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
             title = itemView.findViewById(R.id.tv_home_item_title);
             tvSuperChapterName = itemView.findViewById(R.id.tv_super_chapterName);
             tvChapterName = itemView.findViewById(R.id.tv_chapterName);
+            ivRedHeart = itemView.findViewById(R.id.iv_red_heart);
         }
     }
 

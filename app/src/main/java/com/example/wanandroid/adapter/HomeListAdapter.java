@@ -4,6 +4,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,11 +52,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
 //        holder.tvTime.setText(dataBean.getNiceShareDate());  //几天前
         holder.tvSuperChapterName.setText(dataBean.getSuperChapterName());
         holder.tvChapterName.setText(dataBean.getChapterName());
-//        //点击事件处理-关注
-//        holder.ivRedHeart.setOnClickListener((View)->{
-//
-//            holder.ivRedHeart.setImageResource(R.drawable.heart_gray_selector);
-//        });
+
         //点击事件处理
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +83,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
         private TextView tvChapterName;
 
         //关注
-        private ImageView ivRedHeart;
+        CheckBox cbHeart;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,7 +93,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
             title = itemView.findViewById(R.id.tv_home_item_title);
             tvSuperChapterName = itemView.findViewById(R.id.tv_super_chapterName);
             tvChapterName = itemView.findViewById(R.id.tv_chapterName);
-            ivRedHeart = itemView.findViewById(R.id.iv_red_heart);
+            cbHeart = itemView.findViewById(R.id.cbRedHeart);
         }
     }
 

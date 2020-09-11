@@ -1,6 +1,8 @@
 package com.example.wanandroid.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.internal.view.SupportMenuItem;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -8,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -22,12 +25,14 @@ import com.example.wanandroid.fragment.HomeFragment;
 import com.example.wanandroid.fragment.ProjectFragment;
 import com.example.wanandroid.fragment.PublicFragment;
 import com.example.wanandroid.fragment.SystemFragment;
+import com.google.android.material.navigation.NavigationView;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.toast.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         onClickTitleBar();
         //初始化Toast——github
         ToastUtils.init(getApplication());
+        //侧滑栏事件处理
+        onNavigationView();
     }
     private void initView() {
         binding.rg.setOnCheckedChangeListener(this);
@@ -149,4 +156,43 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         });
     }
 
+
+    //侧滑栏的事件处理
+    private void onNavigationView(){
+        //背景图点击事件处理
+        binding.mainNavigationView.getHeaderView(0).setOnClickListener((View)->{
+            ToastUtils.show("背景图");
+        });
+        //menu点击事件处理
+        binding.mainNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.integral :
+                        ToastUtils.show("积分");
+                        break;
+                    case R.id.share :
+                        ToastUtils.show("分享");
+                        break;
+                    case R.id.collect :
+                        ToastUtils.show("收藏");
+                        break;
+                    case R.id.todo :
+                        ToastUtils.show("TODO");
+                        break;
+                    case R.id.setting :
+                        ToastUtils.show("设置");
+                        break;
+                    case R.id.about :
+                        ToastUtils.show("关于我们");
+                        break;
+                    case R.id.esc :
+                        ToastUtils.show("退出登录");
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
 }

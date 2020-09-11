@@ -2,22 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/integral"
         android:icon="@mipmap/home_default"
         android:title="我的积分" />
 
     <item
-        android:id="@+id/wallet"
+        android:id="@+id/share"
         android:icon="@mipmap/home_default"
         android:title="我的分享" />
 
     <item
-        android:id="@+id/photo"
+        android:id="@+id/collect"
         android:icon="@mipmap/home_default"
         android:title="我的收藏" />
 
     <item
-        android:id="@+id/file"
+        android:id="@+id/todo"
         android:icon="@mipmap/home_default"
         android:title="TODO" />
     <item

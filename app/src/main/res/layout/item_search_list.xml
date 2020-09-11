@@ -99,12 +99,16 @@
         app:layout_constraintBaseline_toBaselineOf="@id/type1"
         android:textSize="13sp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@mipmap/heart"
-        app:layout_constraintEnd_toStartOf="@id/right_Guideline"
-        app:layout_constraintTop_toBottomOf="@id/article_title" />
+        <CheckBox
+            android:id="@+id/cbRedHeart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:paddingRight="3dp"
+            android:drawableEnd="@drawable/heart_selector"
+            android:button="@null"
+            app:layout_constraintTop_toBottomOf="@id/article_title"
+            app:layout_constraintEnd_toEndOf="@id/right_Guideline"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

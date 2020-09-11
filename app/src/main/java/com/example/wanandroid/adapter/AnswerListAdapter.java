@@ -4,6 +4,8 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
         holder.tvSuperChapterName.setText(dataBean.getSuperChapterName());
         holder.tvChapterName.setText(dataBean.getChapterName());
 
+        //item点击事件处理
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +81,9 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
         //具体
         private TextView tvChapterName;
 
+        //关注
+        CheckBox cbHeart;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             author = itemView.findViewById(R.id.tv_answer_author);
@@ -86,6 +92,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.My
             desc = itemView.findViewById(R.id.tv_answer_title_des);
             tvSuperChapterName = itemView.findViewById(R.id.tv_answer_super_chapterName);
             tvChapterName = itemView.findViewById(R.id.tv_answer_chapterName);
+            cbHeart = itemView.findViewById(R.id.cbRedHeart);
         }
     }
     //回调事件

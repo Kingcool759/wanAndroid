@@ -91,6 +91,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <!--左边滑出菜单-->
             <com.google.android.material.navigation.NavigationView
+                android:id="@+id/main_navigationView"
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"

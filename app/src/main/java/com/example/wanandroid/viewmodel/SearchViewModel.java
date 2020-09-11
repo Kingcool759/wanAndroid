@@ -1,5 +1,6 @@
 package com.example.wanandroid.viewmodel;
 
+import android.text.Html;
 import android.util.Log;
 
 import androidx.databinding.ObservableArrayList;
@@ -8,11 +9,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.wanandroid.BR;
 import com.example.wanandroid.R;
 import com.example.wanandroid.api.ApiCallback;
 import com.example.wanandroid.api.AppApiService;
 import com.example.wanandroid.api.NetworkPortal;
+import com.example.wanandroid.arouter.ARouterManager;
 import com.example.wanandroid.databean.ProjectDataListRes;
 import com.example.wanandroid.databean.PublicDataListRes;
 import com.example.wanandroid.databean.SearchArticleListRes;
@@ -49,9 +52,7 @@ public class SearchViewModel extends ViewModel {
      *  按页码和关键字搜索文章
      */
     public void getSearchArticles() {
-        String keykey = getKey().getValue().trim();  // 转一下类型
-        Log.i("getSearchArticles: ",keykey+"");
-       // if(!keykey.equals("")){
+        String keykey = getKey().getValue().trim();  // 转一下类型（LiveData->String），同时去掉空格
         NetworkPortal.getService(AppApiService.class).getSearchArticlesList(pageId,keykey).enqueue(new ApiCallback<SearchArticleListRes>() {
             @Override
             public void onSuccessful(Call<SearchArticleListRes> call, Response<SearchArticleListRes> response) {
@@ -59,12 +60,7 @@ public class SearchViewModel extends ViewModel {
                 if (response == null || response.body() == null) {
                     return;
                 }else {
-                   // for(int i=1;i<response.body().getData().getDatas().size();i++){
-//                        if (datas.size()>0){
-//                            datas.clear();
-//                        }
                         items.setValue(response.body().getData().getDatas());
-                    //}
                 }
             }
 
@@ -73,8 +69,15 @@ public class SearchViewModel extends ViewModel {
                 Log.d("onFail", "啊哦～请求失败了！");
             }
         });
-//        }else {
-//            ToastUtils.show("您输入的关键字为空，请重新输入！");
-//        }
+    }
+    /**
+     *  进入搜索列表详情（跳转传值）
+     *
+     */
+    public void onItemClick(SearchArticleListRes.DataBean.DatasBean item){   //里面的参数任意，不必和上边的items保持一致，但要保证在item_search_list中定义item是什么
+        ARouter.getInstance().build(ARouterManager.WEBVIEW_DETAILS)
+                .withString("title", String.valueOf(item.getTitle()))
+                .withString("link",item.getLink())
+                .navigation();
     }
 }

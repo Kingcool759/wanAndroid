@@ -137,13 +137,13 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             @Override
             public void onTitleClick(View v) {
                 //标题
-                ToastUtils.show("中间View被点击");
+//                ToastUtils.show("中间View被点击");
             }
 
             @Override
             public void onRightClick(View v) {
                 //搜索键
-                ToastUtils.show("右项View被点击");
+//                ToastUtils.show("右项View被点击");
                 ARouter.getInstance().build(ARouterManager.SEARCH_ACTIVITY).navigation();
             }
         });

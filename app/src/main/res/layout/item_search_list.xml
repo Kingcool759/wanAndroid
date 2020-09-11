@@ -17,6 +17,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->viewModel.onItemClick(item)}"
         tools:ignore="MissingConstraints">
 
     <androidx.constraintlayout.widget.Guideline

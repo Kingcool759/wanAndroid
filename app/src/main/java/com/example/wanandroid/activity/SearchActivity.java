@@ -33,24 +33,22 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_search);
+
         //DataBinding双向数据绑定。
         viewModel = ViewModelProviders.of(this).get(SearchViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-//        //获取接口数据
-//        viewModel.getSearchArticles();
+        //返回
+        binding.goBack.setOnClickListener((View)->{
+            finish();
+        });
 
-
-//        show(); //ceshi
+        //获取接口数据
         getCallback();
         binding.rvSearch.addItemDecoration(new DividerItemDecoration(this));
     }
-    private void show(){
-        binding.search.setOnClickListener((View)->{
-            ToastUtils.show(binding.serchEt.getText().toString());  //ceshi
-        });
-    }
+
     private void getCallback(){
         viewModel.key.observe(this,it->{
             viewModel.getSearchArticles();

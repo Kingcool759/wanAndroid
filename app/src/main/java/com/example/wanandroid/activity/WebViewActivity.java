@@ -34,17 +34,10 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ARouter.getInstance().inject(this);  //接收参数注解
         binding = DataBindingUtil.setContentView(this, R.layout.activity_web_view);
 
-        //采用Intent方式,接收首页和问答的数据
-//        Intent intent = getIntent();
-//        //接收数据-from：Fragment
-//        bannerTitle = intent.getStringExtra("bannertitle");
-//        bannerLinkUrl = intent.getStringExtra("bannerLinkUrl");
-
         //采用ARouter方式，接收公众号，体系，项目的数据
-        //路由初始化
+        ARouter.getInstance().inject(this);  //接收参数注解,相当于String bannerTitle = value;    (key,value)中的value,根据key获取
 
         /**
          *  设置webView
@@ -60,6 +53,7 @@ public class WebViewActivity extends AppCompatActivity {
             @Override
             public void onLeftClick(View v) {
                 //goback
+                finish();
             }
 
             @Override

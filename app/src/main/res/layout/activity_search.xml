@@ -24,6 +24,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/go_back"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -33,7 +34,9 @@
             <EditText
                 android:id="@+id/serch_et"
                 style="@style/search_editText_style"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/search_et_background"
+                android:drawableLeft="@mipmap/search"
                 android:hint="用空格隔开多个关键词"
                 android:maxLines="1"
                 android:text="@={viewModel.key}"
@@ -41,15 +44,6 @@
                 android:textColorHint="@color/gray"
                 android:textCursorDrawable="@null"
                 android:textSize="14dp" />
-
-            <ImageView
-                android:id="@+id/search"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:src="@mipmap/search" />
-
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -9,9 +9,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.example.wanandroid.fragment.HomeFragment;
 import com.example.wanandroid.fragment.ProjectFragment;
 import com.example.wanandroid.fragment.PublicFragment;
 import com.example.wanandroid.fragment.SystemFragment;
+import com.example.wanandroid.popupwindow.PhotoPopupWindow;
 import com.google.android.material.navigation.NavigationView;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-
         //初始化控件
         initView();
         //绑定RadioButton
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         ToastUtils.init(getApplication());
         //侧滑栏事件处理
         onNavigationView();
+
     }
     private void initView() {
         binding.rg.setOnCheckedChangeListener(this);
@@ -159,9 +162,10 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
     //侧滑栏的事件处理
     private void onNavigationView(){
-        //背景图点击事件处理
-        binding.mainNavigationView.getHeaderView(0).setOnClickListener((View)->{
-            ToastUtils.show("背景图");
+        //头像点击事件处理
+        binding.mainNavigationView.getHeaderView(0).findViewById(R.id.iv_user).setOnClickListener((View)->{
+            //点击头像弹出PopupWindow
+            showPopupWindow(binding.mainLayout);
         });
         //menu点击事件处理
         binding.mainNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -192,6 +196,30 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                         break;
                 }
                 return false;
+            }
+        });
+    }
+
+    //点击头像进行相册/拍照选择
+    private void showPopupWindow(View parent){
+        PhotoPopupWindow popupWindow = new PhotoPopupWindow(this);
+        //定义PopupWindow的弹出位置
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);//在activity的底部展示。
+//            popupWindow.showAsDropDown(binding.showPopupWindow); //在某个控件下方弹出Popupwindow
+        popupWindow.setImageClickaListener(new PhotoPopupWindow.PhotoDataListener() {
+            @Override
+            public void getTestData(int type) {
+                switch (type){
+                    case 0:  //拍照
+                        Toast.makeText(getBaseContext(),"拍照",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:  //相册
+                        Toast.makeText(getBaseContext(),"相册",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:  //取消
+                        Toast.makeText(getBaseContext(),"取消",Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         });
     }

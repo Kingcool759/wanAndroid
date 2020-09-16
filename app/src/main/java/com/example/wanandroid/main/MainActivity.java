@@ -272,6 +272,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             }
         }
     }
+
+    //请求相机拍照
     private void requestCamera() {
         File outputImage = new File(filePath);
         try
@@ -322,6 +324,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         }
     }
 
+    //设置保存拍照图片——>再次关闭app重新打开为上次拍照照片
     private void setDefualtHead() {
         File outputImage = new File(filePath);
         if (!outputImage.exists()) {

@@ -12,8 +12,6 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
 import com.example.wanandroid.R;
 
 /**

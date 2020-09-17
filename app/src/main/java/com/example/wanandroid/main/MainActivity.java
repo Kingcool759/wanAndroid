@@ -425,8 +425,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      **/
     private void setKeepImage() {
         SharedPreferences sp = getSharedPreferences("sp_img", MODE_PRIVATE);
-        //取出上次存储的图片路径设置此次的图片展示
         String beforeImagePath = sp.getString("imgPath", null);
-        displayImage(beforeImagePath);
+        //取出上次存储的图片路径设置此次的图片展示
+        if(beforeImagePath  !=null){
+            displayImage(beforeImagePath);
+        }else {
+            picture.setImageResource(R.mipmap.user_img);  //设置默认图片user_img
+        }
     }
 }

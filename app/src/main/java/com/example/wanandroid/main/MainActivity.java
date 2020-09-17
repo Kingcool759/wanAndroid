@@ -47,6 +47,7 @@ import com.example.wanandroid.popupwindow.PhotoPopupWindow;
 import com.google.android.material.navigation.NavigationView;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.toast.ToastUtils;
+import com.permissionx.guolindev.PermissionX;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private Uri imageUri;
     private ImageView picture;
     private final String filePath = Environment.getExternalStorageDirectory() + File.separator + "output_image.jpg";
+    private File outputImage = new File(filePath);
     //相册
     public static final int CHOOSE_PHOTO = 2;
     String imagePath = null;
@@ -83,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         ToastUtils.init(getApplication());
         //侧滑栏事件处理
         onNavigationView();
-
     }
 
     private void initView() {
@@ -262,18 +263,25 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      */
 
     private void requestPermission(int type) {
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //请求权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);
-        } else {
-            //根据点击的类型调用特性的方法。
-            if (type == 0) {
-                requestCamera();
-            } else {
-                openAlbum();
-            }
-        }
+        //使用了郭霖大神的Permission库实现
+        PermissionX.init(this)
+                .permissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_NETWORK_STATE)
+                .onExplainRequestReason((scope, deniedList) -> {
+                    String message = "需要您同意以下权限才能正常使用";
+                    scope.showRequestReasonDialog(deniedList, message, "确定", "取消");
+                })
+                .request((allGranted, grantedList, deniedList) -> {
+                    if (allGranted) {
+                        //根据点击的类型调用特定的方法。
+                        if (type == 0) {
+                            requestCamera();
+                        } else {
+                            openAlbum();
+                        }
+                    } else {
+                        Toast.makeText(this, "您拒绝了如下权限：" + deniedList, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -298,30 +306,24 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
      */
     //请求相机拍照
     private void requestCamera() {
-        File outputImage = new File(filePath);
         try {
-            if (!outputImage.getParentFile().exists()) {
-                outputImage.getParentFile().mkdirs();
-            }
-            if (outputImage.exists()) {
-                outputImage.delete();
-            }
-
-            outputImage.createNewFile();
-
-            if (Build.VERSION.SDK_INT >= 24) {
-                imageUri = FileProvider.getUriForFile(this,
-                        "com.example.wanandroid.fileprovider", outputImage);
+            if (imageUri == null) {
+                if (!outputImage.getParentFile().exists()) {
+                    outputImage.getParentFile().mkdirs();
+                }
+                outputImage.createNewFile();
+                if (Build.VERSION.SDK_INT >= 24) {
+                    imageUri = FileProvider.getUriForFile(this,
+                            "com.example.wanandroid.fileprovider", outputImage);
+                }
             }
             //使用隐示的Intent，系统会找到与它对应的活动，即调用摄像头，并把它存储
             Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             startActivityForResult(intent, TAKE_PHOTO);
-            //调用会返回结果的开启方式，返回成功的话，则把它显示出来
         } catch (IOException e) {
             e.printStackTrace();
         }
-        displayImage(filePath);
     }
 
     //处理返回结果的函数，下面是隐示Intent的返回结果的处理方式
@@ -333,8 +335,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                     try {
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         picture.setImageBitmap(bitmap);
-                        //将图片解析成Bitmap对象，并把它显现出来
-                    } catch (FileNotFoundException e) {
+                        //存储上次选择的图片路径，用以再次打开app设置图片
+                        SharedPreferences sp = getSharedPreferences("sp_img", MODE_PRIVATE);  //创建xml文件存储数据，name:创建的xml文件名
+                        SharedPreferences.Editor editor = sp.edit(); //获取edit()
+                        editor.putString("imgPath", filePath);
+                        editor.apply();
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -427,9 +433,9 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         SharedPreferences sp = getSharedPreferences("sp_img", MODE_PRIVATE);
         String beforeImagePath = sp.getString("imgPath", null);
         //取出上次存储的图片路径设置此次的图片展示
-        if(beforeImagePath  !=null){
+        if (beforeImagePath != null) {
             displayImage(beforeImagePath);
-        }else {
+        } else {
             picture.setImageResource(R.mipmap.user_img);  //设置默认图片user_img
         }
     }

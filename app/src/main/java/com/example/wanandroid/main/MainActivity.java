@@ -284,23 +284,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults != null && grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            switch (requestCode) {
-                case 1: {
-                    requestCamera();
-                }
-                break;
-                case 2: {
-                    openAlbum();
-                }
-                break;
-            }
-        }
-    }
-
     /**
      * 调用摄像头拍照功能
      */

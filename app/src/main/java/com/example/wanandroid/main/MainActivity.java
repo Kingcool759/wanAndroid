@@ -44,6 +44,7 @@ import com.example.wanandroid.fragment.ProjectFragment;
 import com.example.wanandroid.fragment.PublicFragment;
 import com.example.wanandroid.fragment.SystemFragment;
 import com.example.wanandroid.popupwindow.PhotoPopupWindow;
+import com.example.wanandroid.view.SelfDialog;
 import com.google.android.material.navigation.NavigationView;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.toast.ToastUtils;
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     //相册
     public static final int CHOOSE_PHOTO = 2;
     String imagePath = null;
+    //退出app的自定义Dialog
+    private SelfDialog selfDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,8 +228,8 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                         ToastUtils.show("关于我们");
                         break;
                     case R.id.esc:
-                        ToastUtils.show("退出登录");
-                        finish();
+//                        ToastUtils.show("退出登录");
+                        alert();
                         break;
                 }
                 return false;
@@ -421,5 +424,28 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         } else {
             picture.setImageResource(R.mipmap.user_img);  //设置默认图片user_img
         }
+    }
+
+    //退出应用程序
+    private void alert(){
+        selfDialog = new SelfDialog(this);
+        selfDialog.setTitle("退出应用程序");
+        selfDialog.setMessage("确定退出应用?");
+        selfDialog.setYesOnclickListener("确定", new SelfDialog.onYesOnclickListener() {
+            @Override
+            public void onYesClick() {
+//                ToastUtils.show("确定"); //消息提示
+                finish();
+                selfDialog.dismiss();
+            }
+        });
+        selfDialog.setNoOnclickListener("取消", new SelfDialog.onNoOnclickListener() {
+            @Override
+            public void onNoClick() {
+//                ToastUtils.show("取消"); //消息提示
+                selfDialog.dismiss();
+            }
+        });
+        selfDialog.show();
     }
 }

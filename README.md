@@ -2,9 +2,10 @@
 ## 玩安卓
 这是一款我调用wandroid网站api接口，采用java语言，通过MVVM模式+JetPack+Retrofit+OkHttp等，架构的app应用程序。目的是学习JetPack各个成员的用法。
 
-扫码下载：(我的博客中有)
-https://www.jianshu.com/p/9c8779dede1e
+扫码下载：
+![img](https://i1.100024.xyz/i/2020/10/11/zows7j.png)
 
+- 首页
   1. 个人中心
   2. 搜索
   3. 轮播图
